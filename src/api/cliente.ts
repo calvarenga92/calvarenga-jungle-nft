@@ -2,7 +2,10 @@ import axios, { AxiosError } from 'axios';
 import type { CodigoErro, CorpoErro } from './tipos';
 import { lerToken, limparToken } from '@/lib/token';
 
-export const cliente = axios.create({ baseURL: '/api', timeout: 12000 });
+export const cliente = axios.create({
+  baseURL: import.meta.env.VITE_API_URL ?? '/api',
+  timeout: 12000,
+});
 
 cliente.interceptors.request.use((config) => {
   const token = lerToken();

@@ -28,8 +28,11 @@ declare module '@tanstack/react-router' {
 }
 
 async function iniciar() {
-  const { iniciarMocks } = await import('./mocks/browser');
-  await iniciarMocks();
+  // Com VITE_API_URL apontando para um backend real, o MSW nem entra no bundle.
+  if (!import.meta.env.VITE_API_URL) {
+    const { iniciarMocks } = await import('./mocks/browser');
+    await iniciarMocks();
+  }
 
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
