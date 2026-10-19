@@ -41,9 +41,9 @@ function ConfirmacaoPedido() {
     <>
       <Trilha
         passos={[
-          { rotulo: 'Inicio', para: '/' },
+          { rotulo: 'Início', para: '/' },
           { rotulo: 'Mercado', para: '/mercado' },
-          { rotulo: 'Confirmacao' },
+          { rotulo: 'Confirmação' },
         ]}
       />
 
@@ -62,26 +62,26 @@ function ConfirmacaoPedido() {
 
             <h1 id="pedido-titulo" className="text-title text-foreground">
               {recusado
-                ? 'A transacao foi recusada'
+                ? 'A transação foi recusada'
                 : 'Seus NFTs agora estao na sua carteira'}
             </h1>
 
             <p className="text-caption text-muted">
               {recusado
                 ? pedido.motivoRecusa
-                : 'Transacao confirmada na Ethereum. A propriedade foi transferida e registrada na rede.'}
+                : 'Transação confirmada na Ethereum. A propriedade foi transferida e registrada na rede.'}
             </p>
           </header>
 
           <dl className="grid gap-4 border-y border-border-subtle py-4 text-caption sm:grid-cols-4">
-            <Dado termo="ID da transacao" valor={pedido.id} />
+            <Dado termo="ID da transação" valor={pedido.id} />
             <Dado termo="Data" valor={dataFormatada} />
             <Dado termo="Total" valor={formatarEth(pedido.totalEth)} />
             <Dado termo="Carteira" valor={pedido.carteira.apelido} />
           </dl>
 
           <div>
-            <h2 className="mb-3 text-label text-foreground">Detalhes da transacao</h2>
+            <h2 className="mb-3 text-label text-foreground">Detalhes da transação</h2>
             <ul className="flex flex-col gap-3">
               {pedido.itens.map((item) => (
                 <li key={`${item.nftId}-${item.edicaoId}`} className="flex items-center gap-3">

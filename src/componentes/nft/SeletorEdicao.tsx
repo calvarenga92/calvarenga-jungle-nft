@@ -11,7 +11,7 @@ interface Props {
 export function SeletorEdicao({ edicoes, selecionada, aoSelecionar }: Props) {
   return (
     <fieldset className="flex flex-col gap-3 border-0 p-0">
-      <legend className="mb-1 text-label text-foreground">Edicao</legend>
+      <legend className="mb-1 text-label text-foreground">Edição</legend>
 
       <div className="flex flex-wrap gap-3">
         {edicoes.map((edicao) => {
@@ -41,7 +41,7 @@ export function SeletorEdicao({ edicoes, selecionada, aoSelecionar }: Props) {
                 {formatarEth(edicao.precoEth)}
               </span>
               <span className="text-caption text-muted">
-                {esgotada ? 'Esgotada' : `${edicao.disponivel} disponiveis`}
+                {esgotada ? 'Esgotada' : `${edicao.disponivel} disponíveis`}
               </span>
             </label>
           );

@@ -6,9 +6,9 @@ test.beforeEach(async ({ page }) => { await limparEstado(page); });
 test('atalho pular para o conteudo aparece no primeiro Tab', async ({ page }) => {
   await page.goto('/');
   // o Tab precisa vir depois da montagem, senao o foco fica no body
-  await page.getByRole('link', { name: 'Kurio, pagina inicial' }).waitFor();
+  await page.getByRole('link', { name: 'Kurio, página inicial' }).waitFor();
   await page.locator('body').press('Tab');
-  await expect(page.getByRole('link', { name: 'Pular para o conteudo' })).toBeFocused();
+  await expect(page.getByRole('link', { name: 'Pular para o conteúdo' })).toBeFocused();
 });
 
 test('cada pagina tem exatamente um h1', async ({ page }) => {

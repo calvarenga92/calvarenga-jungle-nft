@@ -16,7 +16,7 @@ function Layout() {
                    focus:z-50 focus:rounded-[3px] focus:bg-primary focus:px-4
                    focus:py-2 focus:text-primary-ink"
       >
-        Pular para o conteudo
+        Pular para o conteúdo
       </a>
 
       <Cabecalho />

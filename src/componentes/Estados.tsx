@@ -33,7 +33,7 @@ export function SemPermissao(props: EstadoProps) {
 }
 
 export function Erro({
-  titulo = 'Nao foi possivel carregar',
+  titulo = 'Não foi possível carregar',
   descricao = 'Algo falhou no caminho. Tente de novo em instantes.',
   aoTentarDeNovo,
 }: Partial<EstadoProps> & { aoTentarDeNovo?: () => void }) {

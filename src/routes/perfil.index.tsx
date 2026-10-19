@@ -48,7 +48,7 @@ function DadosDoPerfil() {
         noValidate
       >
         <Campo
-          rotulo="Nome de exibicao"
+          rotulo="Nome de exibição"
           name="nome"
           defaultValue={usuario?.nome ?? ''}
           obrigatorio
@@ -60,7 +60,7 @@ function DadosDoPerfil() {
           type="email"
           defaultValue={usuario?.email ?? ''}
           readOnly
-          apoio="O e-mail da conta nao pode ser alterado na simulacao."
+          apoio="O e-mail da conta não pode ser alterado na simulação."
           className="opacity-60"
         />
 

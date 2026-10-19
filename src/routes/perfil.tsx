@@ -21,7 +21,7 @@ function PerfilLayout() {
 
   return (
     <div className="conteudo grid gap-10 py-12 lg:grid-cols-[220px_1fr]">
-      <nav aria-label="Secoes do perfil" className="h-fit">
+      <nav aria-label="Seções do perfil" className="h-fit">
         <h2 className="mb-4 text-label text-foreground">Meu perfil</h2>
 
         <ul className="flex flex-col">

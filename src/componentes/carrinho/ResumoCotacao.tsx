@@ -24,7 +24,7 @@ export function ResumoCotacao({ cotacao, acao }: Props) {
       await aplicar.mutateAsync(codigo);
       definirCodigo('');
     } catch (erro) {
-      definirErroCupom(erro instanceof ErroApi ? erro.message : 'Cupom invalido.');
+      definirErroCupom(erro instanceof ErroApi ? erro.message : 'Cupom inválido.');
     }
   }
 
@@ -56,14 +56,14 @@ export function ResumoCotacao({ cotacao, acao }: Props) {
       ) : (
         <form onSubmit={(e) => void enviarCupom(e)} className="flex flex-col gap-2">
           <label htmlFor="cupom" className="text-caption text-muted">
-            Codigo promocional
+            Código promocional
           </label>
           <div className="flex gap-2">
             <input
               id="cupom"
               value={codigo}
               onChange={(e) => definirCodigo(e.target.value)}
-              placeholder="Digite o codigo"
+              placeholder="Digite o código"
               aria-invalid={erroCupom ? true : undefined}
               aria-describedby={erroCupom ? 'cupom-erro' : undefined}
               className="h-10 min-w-0 flex-1 rounded-[3px] border border-border-subtle

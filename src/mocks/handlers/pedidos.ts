@@ -23,7 +23,7 @@ export const handlersPedidos = [
 
     const chave = request.headers.get('Idempotency-Key');
     if (!chave) {
-      return erro(422, 'DADOS_INVALIDOS', 'Idempotency-Key e obrigatoria.');
+      return erro(422, 'DADOS_INVALIDOS', 'Idempotency-Key é obrigatória.');
     }
 
     const corpo = (await request.json()) as {
@@ -37,7 +37,7 @@ export const handlersPedidos = [
       if (registrado.impressao !== impressao) {
         return erro(
           409, 'CHAVE_IDEMPOTENCIA_CONFLITANTE',
-          'Esta chave foi usada com outro conteudo.',
+          'Esta chave foi usada com outro conteúdo.',
         );
       }
       await atrasar();
@@ -51,7 +51,7 @@ export const handlersPedidos = [
 
     const cotacao = cotacaoAtual(token);
     if (cotacao.itens.length === 0) {
-      return erro(422, 'DADOS_INVALIDOS', 'O carrinho esta vazio.');
+      return erro(422, 'DADOS_INVALIDOS', 'O carrinho está vazio.');
     }
     if (corpo.versaoCotacao !== cotacao.versao) {
       return erro(
@@ -64,7 +64,7 @@ export const handlersPedidos = [
     if (indisponivel) {
       return erro(
         409, 'DISPONIBILIDADE_INSUFICIENTE',
-        `"${indisponivel.titulo}" nao tem a quantidade pedida.`,
+        `"${indisponivel.titulo}" não tem a quantidade pedida.`,
       );
     }
 
@@ -98,7 +98,7 @@ export const handlersPedidos = [
         apelido: carteira.apelido, endereco: carteira.endereco, rede: carteira.rede,
       },
       referenciaTransacao: recusado ? null : `0x${crypto.randomUUID().replace(/-/g, '')}`,
-      motivoRecusa: recusado ? 'A carteira recusou a transacao.' : null,
+      motivoRecusa: recusado ? 'A carteira recusou a transação.' : null,
       criadoEm: agora,
       atualizadoEm: agora,
       versao: proximaVersaoEvento(),

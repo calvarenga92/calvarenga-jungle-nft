@@ -7,7 +7,7 @@ import { Botao } from '@/componentes/ui/Botao';
 import { IndicadorConexao } from './IndicadorConexao';
 
 const NAVEGACAO = [
-  { para: '/', rotulo: 'Inicio' },
+  { para: '/', rotulo: 'Início' },
   { para: '/mercado', rotulo: 'Mercado' },
   { para: '/criadores', rotulo: 'Criadores' },
   { para: '/aprenda', rotulo: 'Aprenda' },
@@ -24,7 +24,7 @@ export function Cabecalho() {
         <Link
           to="/"
           className="text-title tracking-[0.2em] text-foreground"
-          aria-label="Kurio, pagina inicial"
+          aria-label="Kurio, página inicial"
         >
           KURIO
         </Link>

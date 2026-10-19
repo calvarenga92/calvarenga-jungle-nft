@@ -51,7 +51,7 @@ export const handlersSessao = [
 
     const campos: Record<string, string> = {};
     if (!nome?.trim()) campos.nome = 'Informe seu nome.';
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email ?? '')) campos.email = 'E-mail invalido.';
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email ?? '')) campos.email = 'E-mail inválido.';
     if ((senha ?? '').length < 8) campos.senha = 'Use ao menos 8 caracteres.';
     if (Object.keys(campos).length > 0) {
       return erro(422, 'DADOS_INVALIDOS', 'Revise os campos destacados.', campos);
@@ -60,7 +60,7 @@ export const handlersSessao = [
     const existe = Object.values(estado.contas).some(
       (c) => c.usuario.email.toLowerCase() === email.trim().toLowerCase(),
     );
-    if (existe) return erro(409, 'EMAIL_JA_CADASTRADO', 'Ja existe conta com esse e-mail.');
+    if (existe) return erro(409, 'EMAIL_JA_CADASTRADO', 'Já existe conta com esse e-mail.');
 
     const id = `usr-${crypto.randomUUID().slice(0, 8)}`;
     estado.contas[id] = {

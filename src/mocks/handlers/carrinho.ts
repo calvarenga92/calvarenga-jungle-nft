@@ -97,8 +97,8 @@ export const handlersCarrinho = [
       return erro(
         409, 'DISPONIBILIDADE_INSUFICIENTE',
         edicao.disponivel === 0
-          ? 'Esta edicao esgotou.'
-          : `Restam ${edicao.disponivel} unidades desta edicao.`,
+          ? 'Esta edição esgotou.'
+          : `Restam ${edicao.disponivel} unidades desta edição.`,
       );
     }
     if (total > edicao.limitePorPedido) {
@@ -135,7 +135,7 @@ export const handlersCarrinho = [
     if (alvo && alvo.edicao.disponivel < quantidade) {
       return erro(
         409, 'DISPONIBILIDADE_INSUFICIENTE',
-        `Restam ${alvo.edicao.disponivel} unidades desta edicao.`,
+        `Restam ${alvo.edicao.disponivel} unidades desta edição.`,
       );
     }
 
@@ -164,7 +164,7 @@ export const handlersCarrinho = [
 
     const regra = CUPONS[normalizado];
     if (!regra || cenarioEh('cupom-invalido')) {
-      return erro(422, 'CUPOM_INVALIDO', 'Cupom nao encontrado.');
+      return erro(422, 'CUPOM_INVALIDO', 'Cupom não encontrado.');
     }
     if (regra.expirado) {
       return erro(422, 'CUPOM_EXPIRADO', 'Este cupom expirou.');

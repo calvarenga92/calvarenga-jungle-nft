@@ -36,7 +36,7 @@ function normalizar(erro: unknown): ErroApi {
   }
   if (axiosErro.code === 'ECONNABORTED' || !axiosErro.response) {
     return new ErroApi(
-      { codigo: 'SEM_CONEXAO', mensagem: 'Nao foi possivel falar com o servidor.' },
+      { codigo: 'SEM_CONEXAO', mensagem: 'Não foi possível falar com o servidor.' },
       0,
     );
   }

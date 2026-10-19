@@ -14,13 +14,13 @@ export const naoAutenticado = () =>
   erro(401, 'NAO_AUTENTICADO', 'Entre na sua conta para continuar.');
 
 export const sessaoExpirada = () =>
-  erro(401, 'SESSAO_EXPIRADA', 'Sua sessao expirou. Entre novamente.');
+  erro(401, 'SESSAO_EXPIRADA', 'Sua sessão expirou. Entre novamente.');
 
 export const naoEncontrado = (o: string) =>
   erro(404, 'NAO_ENCONTRADO', `${o} nao encontrado.`);
 
 export const falhaTransitoria = () =>
-  erro(500, 'FALHA_TRANSITORIA', 'Servico indisponivel no momento.');
+  erro(500, 'FALHA_TRANSITORIA', 'Serviço indisponível no momento.');
 
 export function tokenDaRequisicao(req: Request): string | null {
   const header = req.headers.get('Authorization');

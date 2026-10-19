@@ -2,8 +2,8 @@ import type { ConsultaNfts, OrdenacaoNft } from '@/api/tipos';
 
 export const ORDENACOES: Array<{ valor: OrdenacaoNft; rotulo: string }> = [
   { valor: 'recentes', rotulo: 'Listados recentemente' },
-  { valor: 'preco-asc', rotulo: 'Menor preco' },
-  { valor: 'preco-desc', rotulo: 'Maior preco' },
+  { valor: 'preco-asc', rotulo: 'Menor preço' },
+  { valor: 'preco-desc', rotulo: 'Maior preço' },
   { valor: 'populares', rotulo: 'Em alta' },
 ];
 

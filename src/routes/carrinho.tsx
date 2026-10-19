@@ -23,7 +23,7 @@ function Carrinho() {
     <>
       <Trilha
         passos={[
-          { rotulo: 'Inicio', para: '/' },
+          { rotulo: 'Início', para: '/' },
           { rotulo: 'Mercado', para: '/mercado' },
           { rotulo: 'Carrinho' },
         ]}
@@ -42,8 +42,8 @@ function Carrinho() {
 
         {cotacao && cotacao.itens.length === 0 && (
           <Vazio
-            titulo="Seu carrinho esta vazio"
-            descricao="Explore o mercado e adicione pecas para continuar."
+            titulo="Seu carrinho está vazio"
+            descricao="Explore o mercado e adicione peças para continuar."
             acao={
               <Botao asChild>
                 <Link to="/mercado">Explorar o mercado</Link>
@@ -56,15 +56,15 @@ function Carrinho() {
           <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
             <table className="w-full border-collapse text-left">
               <caption className="sr-only">
-                Itens no carrinho, com preco, quantidade e total por peca
+                Itens no carrinho, com preço, quantidade e total por peça
               </caption>
               <thead>
                 <tr className="border-b border-border-subtle text-caption text-muted">
                   <th scope="col" className="pb-3 font-normal">NFT</th>
-                  <th scope="col" className="pb-3 font-normal">Preco</th>
-                  <th scope="col" className="pb-3 font-normal">Edicoes</th>
+                  <th scope="col" className="pb-3 font-normal">Preço</th>
+                  <th scope="col" className="pb-3 font-normal">Edições</th>
                   <th scope="col" className="pb-3 text-right font-normal">Total</th>
-                  <th scope="col" className="pb-3"><span className="sr-only">Acoes</span></th>
+                  <th scope="col" className="pb-3"><span className="sr-only">Ações</span></th>
                 </tr>
               </thead>
               <tbody>

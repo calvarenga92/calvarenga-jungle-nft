@@ -37,8 +37,8 @@ function DetalheNft() {
       <div className="conteudo py-16">
         {naoEncontrado ? (
           <Vazio
-            titulo="Peca nao encontrada"
-            descricao="Este NFT nao existe ou saiu do catalogo."
+            titulo="Peça não encontrada"
+            descricao="Este NFT não existe ou saiu do catálogo."
             acao={
               <Botao variante="contorno" asChild>
                 <Link to="/mercado">Voltar ao mercado</Link>
@@ -62,7 +62,7 @@ function DetalheNft() {
       await adicionar.mutateAsync({ nftId, edicaoId: selecionada, quantidade: 1 });
       definirAviso('Adicionado ao carrinho.');
     } catch (erro) {
-      definirAviso(erro instanceof ErroApi ? erro.message : 'Nao foi possivel adicionar.');
+      definirAviso(erro instanceof ErroApi ? erro.message : 'Não foi possível adicionar.');
     }
   }
 
@@ -70,7 +70,7 @@ function DetalheNft() {
     <>
       <Trilha
         passos={[
-          { rotulo: 'Inicio', para: '/' },
+          { rotulo: 'Início', para: '/' },
           { rotulo: 'Mercado', para: '/mercado' },
           { rotulo: nft.titulo },
         ]}
@@ -153,7 +153,7 @@ function DetalheNft() {
 
 function EsqueletoDetalhe() {
   return (
-    <div role="status" aria-label="Carregando peca" className="conteudo grid gap-12 py-16 lg:grid-cols-2">
+    <div role="status" aria-label="Carregando peça" className="conteudo grid gap-12 py-16 lg:grid-cols-2">
       <Esqueleto className="aspect-square w-full" />
       <div className="flex flex-col gap-4">
         <Esqueleto className="h-4 w-24" />

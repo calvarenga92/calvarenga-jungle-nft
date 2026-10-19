@@ -23,12 +23,12 @@ export function Filtros({
 
   return (
     <aside
-      aria-label="Filtros do catalogo"
+      aria-label="Filtros do catálogo"
       className="flex h-fit flex-col gap-8 rounded-[3px] border border-border-subtle
                  bg-surface p-5 lg:sticky lg:top-6"
     >
       <fieldset className="flex flex-col gap-3 border-0 p-0">
-        <legend className="mb-1 text-label text-foreground">Colecoes</legend>
+        <legend className="mb-1 text-label text-foreground">Coleções</legend>
 
         {isPending
           ? Array.from({ length: 4 }, (_, i) => <Esqueleto key={i} className="h-5 w-full" />)

@@ -31,7 +31,7 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
 
   return (
     <section aria-labelledby="titulo-catalogo" className="conteudo py-8">
-      <h2 id="titulo-catalogo" className="sr-only">Catalogo de NFTs</h2>
+      <h2 id="titulo-catalogo" className="sr-only">Catálogo de NFTs</h2>
 
       <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
         <Filtros
@@ -50,8 +50,8 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p aria-live="polite" className="text-caption text-muted">
               {isPending
-                ? 'Carregando catalogo...'
-                : `${data?.total ?? 0} ${data?.total === 1 ? 'peca' : 'pecas'}`}
+                ? 'Carregando catálogo...'
+                : `${data?.total ?? 0} ${data?.total === 1 ? 'peça' : 'peças'}`}
             </p>
 
             <label className="flex items-center gap-2 text-caption text-muted">
@@ -78,15 +78,15 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
 
           {isError && !isPending && (
             <Erro
-              descricao="O catalogo nao respondeu. Isso costuma ser temporario."
+              descricao="O catálogo não respondeu. Isso costuma ser temporário."
               aoTentarDeNovo={() => void refetch()}
             />
           )}
 
           {data && data.itens.length === 0 && (
             <Vazio
-              titulo="Nenhuma peca encontrada"
-              descricao="Nenhum NFT corresponde aos filtros atuais. Tente remover alguma restricao."
+              titulo="Nenhuma peça encontrada"
+              descricao="Nenhum NFT corresponde aos filtros atuais. Tente remover alguma restrição."
             />
           )}
 

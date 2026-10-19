@@ -12,14 +12,14 @@ export function Paginacao({ pagina, totalPaginas, aoMudar }: Props) {
   const paginas = Array.from({ length: totalPaginas }, (_, i) => i + 1);
 
   return (
-    <nav aria-label="Paginacao do catalogo" className="flex justify-center">
+    <nav aria-label="Paginação do catálogo" className="flex justify-center">
       <ul className="flex items-center gap-2">
         <li>
           <button
             type="button"
             onClick={() => aoMudar(pagina - 1)}
             disabled={pagina === 1}
-            aria-label="Pagina anterior"
+            aria-label="Página anterior"
             className="flex size-9 items-center justify-center rounded-[3px]
                        border border-border-subtle text-muted transition-colors
                        hover:text-foreground disabled:opacity-40"
@@ -34,7 +34,7 @@ export function Paginacao({ pagina, totalPaginas, aoMudar }: Props) {
               type="button"
               onClick={() => aoMudar(numero)}
               aria-current={numero === pagina ? 'page' : undefined}
-              aria-label={`Pagina ${numero}`}
+              aria-label={`Página ${numero}`}
               className={cn(
                 'size-9 rounded-[3px] text-label transition-colors',
                 numero === pagina
@@ -52,7 +52,7 @@ export function Paginacao({ pagina, totalPaginas, aoMudar }: Props) {
             type="button"
             onClick={() => aoMudar(pagina + 1)}
             disabled={pagina === totalPaginas}
-            aria-label="Proxima pagina"
+            aria-label="Próxima página"
             className="flex size-9 items-center justify-center rounded-[3px]
                        border border-border-subtle text-muted transition-colors
                        hover:text-foreground disabled:opacity-40"

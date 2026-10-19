@@ -20,7 +20,7 @@ function Mercado() {
       <div className="conteudo pt-10">
         <h1 className="text-display text-foreground">Mercado</h1>
         <p className="mt-2 text-body text-muted">
-          Todas as pecas disponiveis, com filtros e ordenacao refletidos na URL.
+          Todas as peças disponíveis, com filtros e ordenação refletidos na URL.
         </p>
       </div>
       <Catalogo busca={busca} aoMudarBusca={aoMudarBusca} />

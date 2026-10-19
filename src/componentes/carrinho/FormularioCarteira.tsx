@@ -43,7 +43,7 @@ export function FormularioCarteira({ aoCriar }: { aoCriar?: () => void }) {
         erro={erro?.campos?.apelido}
       />
       <Campo
-        rotulo="Endereco da carteira"
+        rotulo="Endereço da carteira"
         name="endereco"
         placeholder="0x seguido de 40 caracteres"
         obrigatorio

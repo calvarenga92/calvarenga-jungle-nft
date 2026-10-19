@@ -3,15 +3,15 @@ import { AtSign, Globe, MessageCircle, Rss, Share2 } from 'lucide-react';
 const COLUNAS = [
   {
     titulo: 'Meu perfil',
-    itens: ['Meu perfil', 'Minha colecao', 'Atividade', 'Estudio do criador', 'Lista de interesse'],
+    itens: ['Meu perfil', 'Minha coleção', 'Atividade', 'Estúdio do criador', 'Lista de interesse'],
   },
   {
     titulo: 'Central de ajuda',
-    itens: ['Central de ajuda', 'Como comprar NFTs', 'Carteira e seguranca', 'Politica de mercado', 'Denunciar item'],
+    itens: ['Central de ajuda', 'Como comprar NFTs', 'Carteira e segurança', 'Política de mercado', 'Denunciar item'],
   },
   {
-    titulo: 'Colecoes',
-    itens: ['Arte digital', 'Fotografia', 'Musica', 'Arte 3D', 'Utilidade'],
+    titulo: 'Coleções',
+    itens: ['Arte digital', 'Fotografia', 'Música', 'Arte 3D', 'Utilidade'],
   },
 ];
 
@@ -75,7 +75,7 @@ export function Rodape() {
               ))}
             </ul>
 
-            <h2 className="mb-3 mt-8 text-label text-foreground">Carteiras compativeis</h2>
+            <h2 className="mb-3 mt-8 text-label text-foreground">Carteiras compatíveis</h2>
             <ul className="flex flex-wrap gap-2">
               {['MetaMask', 'WalletConnect', 'Coinbase'].map((carteira) => (
                 <li

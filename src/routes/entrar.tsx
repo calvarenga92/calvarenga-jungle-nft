@@ -60,7 +60,7 @@ function Entrar() {
         {aba === 'entrar' ? <FormularioEntrar /> : <FormularioCriar />}
 
         <p className="mt-6 border-t border-border-subtle pt-4 text-caption text-muted">
-          Contas da simulacao: <span className="text-foreground">claudio@greenmint.test</span> ou{' '}
+          Contas da simulação: <span className="text-foreground">claudio@greenmint.test</span> ou{' '}
           <span className="text-foreground">marina@greenmint.test</span>, senha{' '}
           <span className="text-foreground">senha12345</span>.
         </p>
@@ -185,7 +185,7 @@ function FormularioCriar() {
         type="password"
         autoComplete="new-password"
         obrigatorio
-        apoio="Minimo de 8 caracteres."
+        apoio="Mínimo de 8 caracteres."
         erro={f.campo('senha')}
       />
 

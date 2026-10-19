@@ -5,7 +5,7 @@ type Passo = { rotulo: string; para?: '/' | '/mercado' | '/carrinho' };
 
 export function Trilha({ passos }: { passos: Passo[] }) {
   return (
-    <nav aria-label="Trilha de navegacao" className="conteudo pt-8">
+    <nav aria-label="Trilha de navegação" className="conteudo pt-8">
       <ol className="flex flex-wrap items-center gap-2 text-caption text-muted">
         {passos.map((passo, indice) => (
           <li key={passo.rotulo} className="flex items-center gap-2">

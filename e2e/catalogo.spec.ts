@@ -34,14 +34,14 @@ test('ordenacao por menor preco coloca a peca mais barata primeiro', async ({ pa
 test('paginacao navega e mantem a pagina na URL', async ({ page }) => {
   await page.goto('/');
   await aguardarCatalogo(page);
-  await page.getByRole('button', { name: 'Pagina 2' }).click();
+  await page.getByRole('button', { name: 'Página 2' }).click();
   await expect(page).toHaveURL(/pagina=2/);
-  await expect(page.getByRole('button', { name: 'Pagina 2' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('button', { name: 'Página 2' })).toHaveAttribute('aria-current', 'page');
 });
 
 test('filtro sem resultado mostra estado vazio, nao tela quebrada', async ({ page }) => {
   await page.goto(url('/', { cenario: 'lista-vazia' }));
-  await expect(page.getByText('Nenhuma peca encontrada')).toBeVisible();
+  await expect(page.getByText('Nenhuma peça encontrada')).toBeVisible();
 });
 
 test('falha do servidor mostra erro com acao de repetir', async ({ page }) => {

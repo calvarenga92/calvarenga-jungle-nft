@@ -23,7 +23,7 @@ function Carteiras() {
           Carteira principal
         </h1>
         <p className="text-caption text-muted">
-          Estas carteiras ficam disponiveis no pagamento e para receber NFTs comprados.
+          Estas carteiras ficam disponíveis no pagamento e para receber NFTs comprados.
         </p>
       </header>
 

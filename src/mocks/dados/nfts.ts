@@ -35,12 +35,12 @@ export const NFTS: Nft[] = Array.from({ length: 24 }, (_, i) => {
     favorito: false,
     versao: 1,
     descricao:
-      'Peca original da colecao, cunhada em edicao limitada com metadados verificados na simulacao.',
+      'Peça original da coleção, cunhada em edição limitada com metadados verificados na simulação.',
     galeria: [imagem(i), imagem(i + 1), imagem(i + 2)],
     edicoes: [
       {
         id: `${i + 1}-padrao`,
-        rotulo: 'Padrao',
+        rotulo: 'Padrão',
         precoEth: preco,
         disponivel: esgotado ? 0 : 3 + (i % 5),
         limitePorPedido: 3,
@@ -54,8 +54,8 @@ export const NFTS: Nft[] = Array.from({ length: 24 }, (_, i) => {
       },
     ],
     atributos: [
-      { nome: 'Raridade', valor: i % 3 === 0 ? 'Lendaria' : 'Comum' },
-      { nome: 'Fundo', valor: ['Ambar', 'Carvao', 'Esmeralda'][i % 3] },
+      { nome: 'Raridade', valor: i % 3 === 0 ? 'Lendária' : 'Comum' },
+      { nome: 'Fundo', valor: ['Âmbar', 'Carvão', 'Esmeralda'][i % 3] },
       { nome: 'Cunhagem', valor: `2026-0${(i % 9) + 1}` },
     ],
   };

@@ -6,7 +6,7 @@ export function Heroi() {
   return (
     <section className="conteudo grid items-center gap-10 py-14 lg:grid-cols-2 lg:gap-16">
       <div className="flex flex-col gap-6">
-        <p className="text-label text-secondary">Bem-vindo a Kurio</p>
+        <p className="text-label text-secondary">Bem-vindo à Kurio</p>
 
         <h1 className="text-display uppercase text-foreground lg:text-display-lg">
           Seja dono do futuro da arte digital
@@ -32,7 +32,7 @@ export function Heroi() {
       >
         <img
           src="/nfts/nft-01.svg"
-          alt="Peca em destaque da colecao Golden Apes"
+          alt="Peça em destaque da coleção Golden Apes"
           width={400}
           height={400}
           fetchPriority="high"

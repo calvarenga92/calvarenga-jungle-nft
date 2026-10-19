@@ -13,7 +13,7 @@ export function Galeria({ imagens, titulo }: Props) {
   return (
     <div className="flex flex-col-reverse gap-4 sm:flex-row">
       {lista.length > 1 && (
-        <ul className="flex gap-3 sm:flex-col" aria-label="Miniaturas da peca">
+        <ul className="flex gap-3 sm:flex-col" aria-label="Miniaturas da peça">
           {lista.map((imagem, indice) => (
             <li key={imagem + indice}>
               <button

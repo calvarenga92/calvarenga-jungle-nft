@@ -55,7 +55,7 @@ function Pagamento() {
     <>
       <Trilha
         passos={[
-          { rotulo: 'Inicio', para: '/' },
+          { rotulo: 'Início', para: '/' },
           { rotulo: 'Carrinho', para: '/carrinho' },
           { rotulo: 'Pagamento' },
         ]}
@@ -69,8 +69,8 @@ function Pagamento() {
 
         {cotacao && cotacao.itens.length === 0 && (
           <Vazio
-            titulo="Nao ha nada para pagar"
-            descricao="Seu carrinho esta vazio. Adicione pecas antes de finalizar."
+            titulo="Não há nada para pagar"
+            descricao="Seu carrinho está vazio. Adicione peças antes de finalizar."
             acao={<Botao asChild><Link to="/mercado">Explorar o mercado</Link></Botao>}
           />
         )}
@@ -128,7 +128,7 @@ function Pagamento() {
                     Cadastre uma carteira
                   </h3>
                   <p className="mb-5 text-caption text-muted">
-                    Os NFTs comprados sao enviados para o endereco informado aqui.
+                    Os NFTs comprados são enviados para o endereço informado aqui.
                   </p>
                   <FormularioCarteira />
                 </div>

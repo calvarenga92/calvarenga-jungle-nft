@@ -3,15 +3,15 @@
  * de modo que a mesma build sirva desenvolvimento, demonstracao e testes.
  */
 export const CENARIOS = {
-  padrao: 'Resposta rapida e consistente',
-  'latencia-alta': 'Latencia de 1,2s a 2,5s em toda consulta',
-  'fora-de-ordem': 'Respostas chegam fora da ordem de emissao',
-  'lista-vazia': 'Catalogo sem resultados',
+  padrao: 'Resposta rápida e consistente',
+  'latencia-alta': 'Latência de 1,2s a 2,5s em toda consulta',
+  'fora-de-ordem': 'Respostas chegam fora da ordem de emissão',
+  'lista-vazia': 'Catálogo sem resultados',
   'falha-conexao': 'Sem resposta da rede',
   'erro-servidor': 'Respostas 500 nas consultas',
-  'sessao-expirada': 'Sessao invalida apos o primeiro uso',
-  'cupom-invalido': 'Qualquer cupom e recusado',
-  'preco-alterado': 'Preco muda durante o checkout',
+  'sessao-expirada': 'Sessão inválida após o primeiro uso',
+  'cupom-invalido': 'Qualquer cupom é recusado',
+  'preco-alterado': 'Preço muda durante o checkout',
   'timeout-pedido': 'Pedido criado, resposta perdida',
   'pagamento-recusado': 'Pagamento sempre recusado',
 } as const;

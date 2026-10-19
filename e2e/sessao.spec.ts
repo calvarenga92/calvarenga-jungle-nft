@@ -32,7 +32,7 @@ test('cadastro valida os campos e devolve erro por campo', async ({ page }) => {
   await page.getByLabel('Senha').fill('123');
   await page.getByRole('button', { name: 'Criar conta' }).click();
 
-  await expect(page.getByText('E-mail invalido.')).toBeVisible();
+  await expect(page.getByText('E-mail inválido.')).toBeVisible();
   await expect(page.getByText('Use ao menos 8 caracteres.')).toBeVisible();
 });
 
