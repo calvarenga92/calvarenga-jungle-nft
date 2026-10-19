@@ -1,0 +1,62 @@
+/**
+ * Cenarios sao selecionados por query param (?cenario=) ou localStorage,
+ * de modo que a mesma build sirva desenvolvimento, demonstracao e testes.
+ */
+export const CENARIOS = {
+  padrao: 'Resposta rapida e consistente',
+  'latencia-alta': 'Latencia de 1,2s a 2,5s em toda consulta',
+  'fora-de-ordem': 'Respostas chegam fora da ordem de emissao',
+  'lista-vazia': 'Catalogo sem resultados',
+  'falha-conexao': 'Sem resposta da rede',
+  'erro-servidor': 'Respostas 500 nas consultas',
+  'sessao-expirada': 'Sessao invalida apos o primeiro uso',
+  'cupom-invalido': 'Qualquer cupom e recusado',
+  'preco-alterado': 'Preco muda durante o checkout',
+  'timeout-pedido': 'Pedido criado, resposta perdida',
+  'pagamento-recusado': 'Pagamento sempre recusado',
+} as const;
+
+export type Cenario = keyof typeof CENARIOS;
+
+const CHAVE = 'greenmint.mock.cenario';
+
+export function cenarioAtual(): Cenario {
+  try {
+    const daUrl = new URLSearchParams(location.search).get('cenario');
+    if (daUrl && daUrl in CENARIOS) {
+      localStorage.setItem(CHAVE, daUrl);
+      return daUrl as Cenario;
+    }
+    const salvo = localStorage.getItem(CHAVE);
+    if (salvo && salvo in CENARIOS) return salvo as Cenario;
+  } catch {
+    // storage bloqueado: cai no padrao
+  }
+  return 'padrao';
+}
+
+export function definirCenario(cenario: Cenario): void {
+  try {
+    localStorage.setItem(CHAVE, cenario);
+  } catch {
+    // nada a fazer
+  }
+}
+
+const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Latencia aplicada antes de responder, conforme o cenario ativo. */
+export async function atrasar(): Promise<void> {
+  const cenario = cenarioAtual();
+  if (cenario === 'latencia-alta') {
+    await espera(1200 + Math.random() * 1300);
+    return;
+  }
+  if (cenario === 'fora-de-ordem') {
+    await espera(Math.random() < 0.5 ? 1500 : 120);
+    return;
+  }
+  await espera(80 + Math.random() * 120);
+}
+
+export const cenarioEh = (...quais: Cenario[]) => quais.includes(cenarioAtual());
