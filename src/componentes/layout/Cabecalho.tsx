@@ -4,6 +4,7 @@ import { Search, ShoppingCart, LogIn } from 'lucide-react';
 import { consultaCarrinho } from '@/api/consultas';
 import { useSessao } from '@/hooks/useSessao';
 import { Botao } from '@/componentes/ui/Botao';
+import { IndicadorConexao } from './IndicadorConexao';
 
 const NAVEGACAO = [
   { para: '/', rotulo: 'Inicio' },
@@ -49,6 +50,8 @@ export function Cabecalho() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <IndicadorConexao />
+
           <Botao variante="fantasma" tamanho="icone" aria-label="Buscar NFTs">
             <Search aria-hidden size={18} />
           </Botao>
