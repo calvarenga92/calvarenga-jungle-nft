@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { consultaNfts } from '@/api/consultas';
 import { ORDENACOES } from '@/lib/consultaNfts';
-import { paraConsulta, type BuscaCatalogo } from '@/lib/busca';
+import { colecoesParaBusca, listaDeColecoes, paraConsulta, type BuscaCatalogo } from '@/lib/busca';
 import { useAlternarFavorito } from '@/hooks/useFavorito';
 import { useSessao } from '@/hooks/useSessao';
 import { Erro, GradeCarregando, Vazio } from '@/componentes/Estados';
@@ -20,13 +20,13 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
   const { autenticado } = useSessao();
   const alternarFavorito = useAlternarFavorito();
 
-  const colecoes = busca.colecao ?? [];
+  const colecoes = listaDeColecoes(busca.colecao);
 
   function alternarColecao(id: string) {
     const proximas = colecoes.includes(id)
       ? colecoes.filter((c) => c !== id)
       : [...colecoes, id];
-    aoMudarBusca({ colecao: proximas.length > 0 ? proximas : undefined, pagina: undefined });
+    aoMudarBusca({ colecao: colecoesParaBusca(proximas), pagina: undefined });
   }
 
   return (

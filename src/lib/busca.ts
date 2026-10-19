@@ -3,7 +3,8 @@ import { ORDENACOES } from './consultaNfts';
 
 export interface BuscaCatalogo {
   busca?: string;
-  colecao?: string[];
+  /** Lista separada por virgula: mantem a URL legivel e editavel a mao. */
+  colecao?: string;
   ordenacao?: OrdenacaoNft;
   disponiveis?: boolean;
   pagina?: number;
@@ -11,10 +12,12 @@ export interface BuscaCatalogo {
 
 const ORDENACOES_VALIDAS = ORDENACOES.map((o) => o.valor);
 
-function comoLista(valor: unknown): string[] | undefined {
-  if (Array.isArray(valor)) return valor.map(String).filter(Boolean);
-  if (typeof valor === 'string' && valor) return [valor];
-  return undefined;
+export function listaDeColecoes(valor: string | undefined): string[] {
+  return valor ? valor.split(',').filter(Boolean) : [];
+}
+
+export function colecoesParaBusca(lista: string[]): string | undefined {
+  return lista.length > 0 ? lista.join(',') : undefined;
 }
 
 /** Validacao defensiva: a URL e editavel pelo usuario e nao pode derrubar a tela. */
@@ -24,7 +27,7 @@ export function validarBusca(bruto: Record<string, unknown>): BuscaCatalogo {
 
   return {
     busca: typeof bruto.busca === 'string' && bruto.busca ? bruto.busca : undefined,
-    colecao: comoLista(bruto.colecao),
+    colecao: typeof bruto.colecao === 'string' && bruto.colecao ? bruto.colecao : undefined,
     ordenacao: ORDENACOES_VALIDAS.includes(ordenacao) ? ordenacao : undefined,
     disponiveis: bruto.disponiveis === true || bruto.disponiveis === 'true' || undefined,
     pagina: Number.isFinite(pagina) && pagina > 1 ? Math.floor(pagina) : undefined,
@@ -34,7 +37,7 @@ export function validarBusca(bruto: Record<string, unknown>): BuscaCatalogo {
 export function paraConsulta(busca: BuscaCatalogo, porPagina = 9): ConsultaNfts {
   return {
     busca: busca.busca,
-    colecoes: busca.colecao,
+    colecoes: listaDeColecoes(busca.colecao),
     ordenacao: busca.ordenacao ?? 'recentes',
     somenteDisponiveis: busca.disponiveis ?? false,
     pagina: busca.pagina ?? 1,
