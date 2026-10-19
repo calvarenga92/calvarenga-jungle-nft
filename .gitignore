@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+coverage
+*.local
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# notas de trabalho, fora do repositorio
+_notas/
+verificar.mjs
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
