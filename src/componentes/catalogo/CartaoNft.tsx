@@ -34,7 +34,8 @@ export function CartaoNft({ nft, aoAlternarFavorito }: Props) {
                 ? `Remover ${nft.titulo} dos favoritos`
                 : `Adicionar ${nft.titulo} aos favoritos`
             }
-            className="absolute right-2 top-2 flex size-8 items-center justify-center
+            // z-10 mantem o botao acima do link esticado que cobre o cartao
+            className="absolute right-2 top-2 z-10 flex size-8 items-center justify-center
                        rounded-full bg-ink/70 text-foreground backdrop-blur
                        transition-colors hover:text-primary"
           >
