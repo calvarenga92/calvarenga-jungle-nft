@@ -119,7 +119,7 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 
 ## Testes
 
-58 testes Playwright, rodando em desktop e mobile:
+64 testes Playwright, rodando em desktop e mobile:
 
 | Arquivo | Cobre |
 |---|---|
@@ -128,12 +128,16 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 | `compra.spec.ts` | Carrinho vazio, quantidade, cupom válido/inválido/expirado, compra completa, pagamento recusado, recibo após recarregar |
 | `tempo-real.spec.ts` | Conexão ativa, preço mudando sozinho, evento atrasado não regride o preço |
 | `acessibilidade.spec.ts` | Skip link, um `h1` por página, texto alternativo, navegação por teclado, `aria-pressed`, menu mobile |
+| `layout.spec.ts` | Nenhuma rota rola na horizontal, em desktop e mobile |
 
 Três problemas reais apareceram nessa suíte e estão corrigidos no histórico:
 
 - a página de entrada não tinha `h1`;
 - o botão de favoritar ficava embaixo do link esticado do cartão, então clicar no coração levava para o detalhe;
-- o menu de navegação sumia no mobile, deixando o catálogo inalcançável abaixo de 768px.
+- o menu de navegação sumia no mobile, deixando o catálogo inalcançável abaixo de 768px;
+- a busca aberta estourava a largura do cabeçalho no mobile.
+
+O último passou despercebido pelos testes funcionais, que acham e clicam em elemento fora da tela. Por isso o `layout.spec.ts` compara `scrollWidth` com `clientWidth` — teste que passa com layout quebrado não protege nada.
 
 O teste de ordenação de eventos foi reescrito depois de falhar sob execução paralela. Ele amostrava em cadência fixa; agora observa até juntar evidência suficiente. Teste instável não serve de rede de proteção.
 
