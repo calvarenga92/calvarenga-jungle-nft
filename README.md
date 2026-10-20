@@ -1,5 +1,7 @@
 # Kurio — Marketplace de NFTs
 
+Desenvolvido por Claudio Alvarenga.
+
 Desafio técnico de front-end. Marketplace completo com catálogo, carrinho, checkout, perfil e atualizações em tempo real, rodando inteiramente no navegador.
 
 Não existe backend: a API é simulada com MSW, e os eventos de tempo real têm um simulador local por trás da mesma interface do `socket.io-client`. Com as variáveis de ambiente apontando para serviços reais, nada disso entra no bundle.
@@ -13,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Contas da simulação: `claudio@greenmint.test` ou `marina@greenmint.test`, senha `senha12345`.
+Contas da simulação: `claudio@kurio.test` ou `marina@kurio.test`, senha `senha12345`.
 
 ```bash
 npm run verificar    # typecheck + lint + build + testes

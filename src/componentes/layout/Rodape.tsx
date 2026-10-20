@@ -15,7 +15,7 @@ const COLUNAS = [
   },
 ];
 
-// lucide-react removeu os icones de marca; os nomes ficam no rotulo acessivel.
+// lucide-react removeu os ícones de marca; os nomes ficam no rótulo acessivel.
 const REDES = [
   { Icone: Globe, nome: 'Facebook' },
   { Icone: AtSign, nome: 'Instagram' },
@@ -90,9 +90,13 @@ export function Rodape() {
           </div>
         </div>
 
-        <p className="border-t border-border-subtle px-6 py-6 text-center text-caption text-muted">
-          © 2026 Kurio. Propriedade digital para todos.
-        </p>
+        <div
+          className="flex flex-col items-center gap-1 border-t border-border-subtle
+                     px-6 py-6 text-center text-caption text-muted"
+        >
+          <p>© 2026 Kurio. Propriedade digital para todos.</p>
+          <p>Desenvolvido por Claudio Alvarenga</p>
+        </div>
       </div>
     </footer>
   );
