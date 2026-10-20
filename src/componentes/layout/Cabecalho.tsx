@@ -22,7 +22,7 @@ export function Cabecalho() {
 
   return (
     <header className="border-b border-border-subtle">
-      <div className="conteudo flex h-20 items-center justify-between gap-6">
+      <div className="conteudo relative flex h-20 items-center justify-between gap-6">
         <Link
           to="/"
           className="text-title tracking-[0.2em] text-foreground"

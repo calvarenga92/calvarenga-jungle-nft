@@ -42,7 +42,9 @@ export function BuscaCabecalho() {
       role="search"
       onSubmit={buscar}
       onKeyDown={(e) => { if (e.key === 'Escape') definirAberta(false); }}
-      className="flex items-center gap-1"
+      // no mobile a busca cobre a linha inteira: nao cabe ao lado dos outros itens
+      className="flex items-center gap-1 max-sm:absolute max-sm:inset-x-0
+                 max-sm:z-20 max-sm:bg-ink max-sm:px-6"
     >
       <label htmlFor="busca-catalogo" className="sr-only">
         Buscar por título, criador ou coleção
@@ -52,8 +54,9 @@ export function BuscaCabecalho() {
         ref={campo}
         type="search"
         placeholder="título, criador, coleção"
-        className="h-10 w-40 rounded-[3px] border border-border-subtle bg-surface
-                   px-3 text-caption text-foreground focus:border-primary sm:w-56"
+        className="h-10 min-w-0 flex-1 rounded-[3px] border border-border-subtle
+                   bg-surface px-3 text-caption text-foreground focus:border-primary
+                   sm:w-56 sm:flex-none"
       />
       <button
         type="submit"
