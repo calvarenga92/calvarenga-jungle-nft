@@ -2,13 +2,14 @@ import { queryOptions } from '@tanstack/react-query';
 import { cliente } from './cliente';
 import { paraParametros } from '@/lib/consultaNfts';
 import type {
-  Carteira, Colecao, ConsultaNfts, Cotacao, Nft, NftResumo, Pagina, Pedido, Sessao,
+  Carteira, Colecao, ConsultaNfts, Cotacao, FaixaPreco, Nft, NftResumo, Pagina, Pedido, Sessao,
 } from './tipos';
 
 export const chaves = {
   nfts: (consulta: ConsultaNfts) => ['nfts', consulta] as const,
   nft: (id: string) => ['nft', id] as const,
   colecoes: ['colecoes'] as const,
+  faixaPreco: ['faixa-preco'] as const,
   favoritos: ['favoritos'] as const,
   sessao: ['sessao'] as const,
   carrinho: ['carrinho'] as const,
@@ -37,6 +38,12 @@ export const consultaNft = (id: string) =>
 export const consultaColecoes = queryOptions({
   queryKey: chaves.colecoes,
   queryFn: async () => (await cliente.get<Colecao[]>('/colecoes')).data,
+  staleTime: 5 * 60 * 1000,
+});
+
+export const consultaFaixaPreco = queryOptions({
+  queryKey: chaves.faixaPreco,
+  queryFn: async () => (await cliente.get<FaixaPreco>('/nfts/faixa')).data,
   staleTime: 5 * 60 * 1000,
 });
 

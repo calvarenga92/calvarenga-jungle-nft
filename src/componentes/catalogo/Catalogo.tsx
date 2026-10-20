@@ -37,12 +37,21 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
         <Filtros
           colecoesSelecionadas={colecoes}
           somenteDisponiveis={busca.disponiveis ?? false}
+          precoMin={busca.precoMin}
+          precoMax={busca.precoMax}
+          aoAplicarPreco={(faixa) => aoMudarBusca({ ...faixa, pagina: undefined })}
           aoAlternarColecao={alternarColecao}
           aoAlternarDisponiveis={(valor) =>
             aoMudarBusca({ disponiveis: valor || undefined, pagina: undefined })
           }
           aoLimpar={() =>
-            aoMudarBusca({ colecao: undefined, disponiveis: undefined, pagina: undefined })
+            aoMudarBusca({
+              colecao: undefined,
+              disponiveis: undefined,
+              precoMin: undefined,
+              precoMax: undefined,
+              pagina: undefined,
+            })
           }
         />
 

@@ -2,10 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { consultaColecoes } from '@/api/consultas';
 import { Esqueleto } from '@/componentes/Estados';
 import { Botao } from '@/componentes/ui/Botao';
+import { FiltroPreco } from './FiltroPreco';
 
 interface Props {
   colecoesSelecionadas: string[];
   somenteDisponiveis: boolean;
+  precoMin?: string;
+  precoMax?: string;
+  aoAplicarPreco: (faixa: { precoMin?: string; precoMax?: string }) => void;
   aoAlternarColecao: (id: string) => void;
   aoAlternarDisponiveis: (valor: boolean) => void;
   aoLimpar: () => void;
@@ -14,12 +18,16 @@ interface Props {
 export function Filtros({
   colecoesSelecionadas,
   somenteDisponiveis,
+  precoMin,
+  precoMax,
+  aoAplicarPreco,
   aoAlternarColecao,
   aoAlternarDisponiveis,
   aoLimpar,
 }: Props) {
   const { data: colecoes, isPending } = useQuery(consultaColecoes);
-  const temFiltro = colecoesSelecionadas.length > 0 || somenteDisponiveis;
+  const temFiltro =
+    colecoesSelecionadas.length > 0 || somenteDisponiveis || Boolean(precoMin || precoMax);
 
   return (
     <aside
@@ -48,6 +56,8 @@ export function Filtros({
               </label>
             ))}
       </fieldset>
+
+      <FiltroPreco precoMin={precoMin} precoMax={precoMax} aoAplicar={aoAplicarPreco} />
 
       <fieldset className="flex flex-col gap-3 border-0 p-0">
         <legend className="mb-1 text-label text-foreground">Disponibilidade</legend>

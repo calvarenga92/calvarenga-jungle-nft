@@ -50,6 +50,11 @@ export interface ConsultaNfts {
   porPagina: number;
 }
 
+export interface FaixaPreco {
+  minimo: Eth;
+  maximo: Eth;
+}
+
 export interface Pagina<T> {
   itens: T[];
   pagina: number;

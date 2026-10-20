@@ -17,7 +17,7 @@ export const sessaoExpirada = () =>
   erro(401, 'SESSAO_EXPIRADA', 'Sua sessão expirou. Entre novamente.');
 
 export const naoEncontrado = (o: string) =>
-  erro(404, 'NAO_ENCONTRADO', `${o} nao encontrado.`);
+  erro(404, 'NAO_ENCONTRADO', `${o} não encontrado.`);
 
 export const falhaTransitoria = () =>
   erro(500, 'FALHA_TRANSITORIA', 'Serviço indisponível no momento.');

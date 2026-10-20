@@ -50,7 +50,7 @@ test('compra completa leva ao recibo e esvazia o carrinho', async ({ page }) => 
   await page.getByRole('button', { name: 'Confirmar compra' }).click();
 
   await page.waitForURL(/\/pedido\//);
-  await expect(page.getByText('Seus NFTs agora estao na sua carteira')).toBeVisible();
+  await expect(page.getByText('Seus NFTs agora estão na sua carteira')).toBeVisible();
 
   await page.goto('/carrinho');
   await expect(page.getByText('Seu carrinho está vazio')).toBeVisible();
@@ -75,5 +75,5 @@ test('recibo continua acessivel ao recarregar', async ({ page }) => {
   await page.waitForURL(/\/pedido\//);
 
   await page.reload();
-  await expect(page.getByText('Seus NFTs agora estao na sua carteira')).toBeVisible();
+  await expect(page.getByText('Seus NFTs agora estão na sua carteira')).toBeVisible();
 });

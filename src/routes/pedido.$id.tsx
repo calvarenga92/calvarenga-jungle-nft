@@ -63,7 +63,7 @@ function ConfirmacaoPedido() {
             <h1 id="pedido-titulo" className="text-title text-foreground">
               {recusado
                 ? 'A transação foi recusada'
-                : 'Seus NFTs agora estao na sua carteira'}
+                : 'Seus NFTs agora estão na sua carteira'}
             </h1>
 
             <p className="text-caption text-muted">

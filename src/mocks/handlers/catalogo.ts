@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import type { Nft, NftResumo, Pagina } from '@/api/tipos';
+import type { FaixaPreco, Nft, NftResumo, Pagina } from '@/api/tipos';
 import { paraUnidades } from '@/lib/decimal';
 import { atrasar, cenarioEh } from '../cenarios';
 import { falhaTransitoria, naoEncontrado, tokenDaRequisicao } from '../respostas';
@@ -98,6 +98,24 @@ export const handlersCatalogo = [
       totalPaginas,
     };
     return HttpResponse.json(resposta);
+  }),
+
+  // precisa vir antes de /nfts/:id, senao "faixa" e tratado como id
+  http.get('/api/nfts/faixa', async () => {
+    await atrasar();
+
+    const precos = estado.nfts.map((nft) =>
+      nft.edicoes.map((e) => e.precoEth).reduce((a, b) =>
+        paraUnidades(a) <= paraUnidades(b) ? a : b),
+    );
+
+    const ordenados = [...precos].sort((a, b) =>
+      Number(paraUnidades(a) - paraUnidades(b)));
+
+    return HttpResponse.json({
+      minimo: ordenados.at(0) ?? '0',
+      maximo: ordenados.at(-1) ?? '0',
+    } satisfies FaixaPreco);
   }),
 
   http.get('/api/nfts/:id', async ({ params, request }) => {

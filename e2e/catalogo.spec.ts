@@ -80,3 +80,38 @@ test('busca sem resultado explica o termo que falhou', async ({ page }) => {
   // o termo tambem fica visivel no cabecalho da lista, com acao de limpar
   await expect(page.getByRole('button', { name: 'limpar busca' })).toBeVisible();
 });
+
+test('faixa de preço vinda da URL filtra o catálogo', async ({ page }) => {
+  await page.goto(url('/', { precoMax: '1' }));
+  await aguardarCatalogo(page);
+
+  const precos = await cartoes(page).locator('p.text-primary').allTextContents();
+  expect(precos.length).toBeGreaterThan(0);
+  expect(precos.every((p) => Number(p.replace(' ETH', '')) <= 1)).toBe(true);
+});
+
+test('faixa inválida na URL é ignorada, não quebra a lista', async ({ page }) => {
+  await page.goto(url('/', { precoMax: 'abc' }));
+  await aguardarCatalogo(page);
+  await expect(cartoes(page)).toHaveCount(9);
+});
+
+test('o controle de preço reflete a faixa que veio na URL', async ({ page }) => {
+  await page.goto(url('/', { precoMin: '1', precoMax: '3' }));
+  await aguardarCatalogo(page);
+  await expect(page.getByText(/^Preço:/)).toContainText('1.00');
+  await expect(page.getByText(/^Preço:/)).toContainText('3.00');
+});
+
+test('mover o controle e aplicar grava a faixa na URL', async ({ page }) => {
+  await page.goto('/');
+  await aguardarCatalogo(page);
+
+  const maximo = page.getByRole('slider', { name: 'Preço máximo em ETH' });
+  await maximo.focus();
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+
+  await page.getByRole('button', { name: 'Aplicar' }).click();
+  await expect(page).toHaveURL(/precoMax=/);
+});
