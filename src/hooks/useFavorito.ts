@@ -4,8 +4,8 @@ import { chaves } from '@/api/consultas';
 import type { NftResumo, Pagina } from '@/api/tipos';
 
 /**
- * Atualizacao otimista: a interface responde antes da rede e volta
- * ao estado anterior se o servidor recusar.
+ * Atualização otimista: a interface responde antes da rede e volta ao estado
+ * anterior se o servidor recusar.
  */
 export function useAlternarFavorito() {
   const qc = useQueryClient();

@@ -7,7 +7,7 @@ export function useCarrinho() {
   return useQuery(consultaCarrinho);
 }
 
-/** Toda mutacao devolve a cotacao inteira: um unico ponto de verdade para os totais. */
+/** Toda mutação devolve a cotação inteira: um único ponto de verdade para os totais. */
 function useMutacaoCarrinho<V>(executar: (valor: V) => Promise<Cotacao>) {
   const qc = useQueryClient();
   return useMutation({

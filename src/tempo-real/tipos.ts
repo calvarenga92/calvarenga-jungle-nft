@@ -3,8 +3,8 @@ import type { EventosServidor } from '@/api/eventos';
 export type EstadoConexao = 'conectando' | 'conectado' | 'desconectado';
 
 /**
- * Interface minima que a aplicacao consome. O socket.io-client e o simulador
- * local implementam a mesma coisa, entao nenhuma tela sabe qual esta ativo.
+ * Interface mínima que a aplicação consome. O socket.io-client e o simulador
+ * implementam a mesma coisa, então nenhuma tela sabe qual está ativo.
  */
 export interface Conexao {
   escutar<E extends keyof EventosServidor>(

@@ -13,7 +13,7 @@ cliente.interceptors.request.use((config) => {
   return config;
 });
 
-/** Erro de aplicacao: o front decide pelo codigo, nunca pelo texto da mensagem. */
+/** Erro de aplicação: o front decide pelo código, nunca pelo texto da mensagem. */
 export class ErroApi extends Error {
   readonly codigo: CodigoErro;
   readonly status: number;

@@ -6,7 +6,7 @@ import type { Conexao, EstadoConexao } from './tipos';
 const INTERVALO_PADRAO_MS = 7000;
 const INTERVALO_RAPIDO_MS = 1200;
 
-/** ?eventos=rapido acelera a cadencia para demonstrar e testar o tempo real. */
+/** ?eventos=rapido acelera a cadência para demonstrar e testar o tempo real. */
 function intervalo(): number {
   try {
     const parametro = new URLSearchParams(location.search).get('eventos');
@@ -17,9 +17,9 @@ function intervalo(): number {
 }
 
 /**
- * Sem servidor disponivel, o mesmo contrato e produzido localmente.
- * No cenario "fora-de-ordem" os eventos chegam embaralhados de proposito,
- * para a protecao por versao do cliente ficar observavel.
+ * Produzo o mesmo contrato localmente quando não há servidor. No cenário
+ * "fora-de-ordem" embaralho os eventos de propósito, para a proteção por
+ * versão ficar observável.
  */
 export function criarSimulador(): Conexao {
   const ouvintes = new Map<string, Set<(evento: never) => void>>();
@@ -92,7 +92,7 @@ export function criarSimulador(): Conexao {
       return () => observadores.delete(ouvinte);
     },
     identificar() {
-      // sem servidor nao ha sala por usuario
+      // sem servidor não ha sala por usuário
     },
     encerrar() {
       clearTimeout(abertura);

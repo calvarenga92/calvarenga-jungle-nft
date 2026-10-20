@@ -1,6 +1,6 @@
 const CHAVE = 'kurio.token';
 
-/** sessionStorage pode lancar em navegacao privada: a sessao vive em memoria nesse caso. */
+/** sessionStorage pode lançar em navegação privada: a sessão vive em memória nesse caso. */
 let memoria: string | null = null;
 
 export function lerToken(): string | null {
@@ -17,7 +17,7 @@ export function gravarToken(token: string): void {
   try {
     sessionStorage.setItem(CHAVE, token);
   } catch {
-    // mantido apenas em memoria
+    // mantido apenas em memória
   }
 }
 

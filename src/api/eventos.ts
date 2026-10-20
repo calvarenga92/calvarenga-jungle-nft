@@ -1,8 +1,8 @@
 import type { Eth, StatusPedido } from './tipos';
 
 /**
- * Eventos carregam identidade estavel, recurso afetado e versao.
- * O cliente descarta duplicatas e versoes anteriores a que ja aplicou.
+ * Todo evento carrega identidade, recurso afetado e versão. O cliente descarta
+ * duplicata pelo id e versão anterior à que já aplicou.
  */
 export interface EventoBase {
   eventoId: string;

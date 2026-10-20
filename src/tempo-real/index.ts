@@ -4,9 +4,8 @@ let conexao: Conexao | null = null;
 let pendente: Promise<Conexao> | null = null;
 
 /**
- * Carregada sob demanda: so entra no bundle o lado que vai ser usado.
- * Com VITE_SOCKET_URL definida fala com o servidor; sem ela, o simulador
- * local assume o mesmo contrato e a demo roda sem backend.
+ * Carrego sob demanda: só entra no bundle o lado que vai ser usado.
+ * Com VITE_SOCKET_URL falo com o servidor; sem ela, uso o simulador local.
  */
 export function obterConexao(): Promise<Conexao> {
   if (conexao) return Promise.resolve(conexao);

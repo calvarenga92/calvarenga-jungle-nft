@@ -10,8 +10,8 @@ interface Entrada {
 }
 
 /**
- * A chave de idempotencia nasce com a tentativa e so e trocada quando o pedido
- * e confirmado. Reenviar apos timeout reaproveita o mesmo pedido em vez de cobrar duas vezes.
+ * Gero a chave na montagem da tentativa e só troco quando o pedido é confirmado.
+ * Reenviar após timeout reaproveita o pedido em vez de cobrar duas vezes.
  */
 export function useFinalizarPedido() {
   const qc = useQueryClient();

@@ -14,7 +14,7 @@ function localizar(nftId: string, edicaoId: string) {
   return nft && edicao ? { nft, edicao } : null;
 }
 
-/** Reprojeta o item a partir do catalogo atual: preco e disponibilidade nunca ficam velhos. */
+/** Reprojeta o item a partir do catálogo atual: preço e disponibilidade nunca ficam velhos. */
 function sincronizar(item: ItemCarrinho): ItemCarrinho {
   const alvo = localizar(item.nftId, item.edicaoId);
   if (!alvo) return item;
@@ -48,7 +48,7 @@ export function cotacaoAtual(token: string | null): Cotacao {
   const taxa = temItens ? TAXA_REDE : '0';
   const total = somar(subtrair(subtotal, desconto), taxa);
 
-  // A versao resume preco, quantidade e cupom: qualquer mudanca invalida a cotacao no checkout.
+  // A versão resume preço, quantidade e cupom: qualquer mudanca inválida a cotação no checkout.
   const impressao = [
     ...carrinho.itens.map((i) => `${i.edicaoId}:${i.quantidade}:${i.precoUnitarioEth}`),
     carrinho.cupom?.codigo ?? '-',

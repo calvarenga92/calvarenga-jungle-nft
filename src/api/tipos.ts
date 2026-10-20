@@ -1,4 +1,4 @@
-/** Valores em ETH trafegam como string decimal para preservar precisao. */
+/** Valores em ETH trafegam como string decimal para preservar precisão. */
 export type Eth = string;
 
 export type OrdenacaoNft =
@@ -84,7 +84,7 @@ export interface Cotacao {
   taxaRedeEth: Eth;
   totalEth: Eth;
   cupom: Cupom | null;
-  /** Identifica a cotacao usada na confirmacao; muda quando preco ou disponibilidade mudam. */
+  /** Identifica a cotação usada na confirmacao; muda quando preço ou disponibilidade mudam. */
   versao: string;
   expiraEm: string;
 }
@@ -110,7 +110,7 @@ export interface ItemPedido {
 export interface Pedido {
   id: string;
   status: StatusPedido;
-  /** Snapshot imutavel: alteracoes posteriores no catalogo nao mudam o recibo. */
+  /** Snapshot imutavel: alterações posteriores no catálogo não mudam o recibo. */
   itens: ItemPedido[];
   subtotalEth: Eth;
   descontoEth: Eth;

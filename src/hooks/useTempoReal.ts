@@ -6,7 +6,7 @@ import type { Nft, NftResumo, Pagina, Pedido } from '@/api/tipos';
 import { obterConexao, type EstadoConexao } from '@/tempo-real';
 import { useSessao } from './useSessao';
 
-/** Eventos ja aplicados: a mesma entrega repetida nao e processada de novo. */
+/** Eventos já aplicados: a mesma entrega repetida não é processada de novo. */
 const aplicados = new Set<string>();
 
 function menorPrecoDe(evento: NftAtualizado) {
@@ -16,9 +16,8 @@ function menorPrecoDe(evento: NftAtualizado) {
 }
 
 /**
- * A ordem de entrega nao e garantida. Um evento so e aplicado se a versao
- * dele for maior que a ja exibida — e por isso que um pacote atrasado
- * nunca faz o preco regredir.
+ * A entrega não garante ordem. Só aplico o evento se a versão dele for maior
+ * que a exibida, senão um pacote atrasado faria o preço regredir.
  */
 function aplicarNft(qc: QueryClient, evento: NftAtualizado) {
   const menorPreco = menorPrecoDe(evento);
@@ -82,7 +81,7 @@ export function useTempoReal() {
   const [estado, definirEstado] = useState<EstadoConexao>('conectando');
 
   useEffect(() => {
-    // a conexao chega de forma assincrona; o componente pode sair antes disso
+    // a conexão chega de forma assíncrona; o componente pode sair antes disso
     let ativo = true;
     const encerrar: Array<() => void> = [];
 

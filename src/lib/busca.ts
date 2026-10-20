@@ -3,7 +3,7 @@ import { ORDENACOES } from './consultaNfts';
 
 export interface BuscaCatalogo {
   busca?: string;
-  /** Lista separada por virgula: mantem a URL legivel e editavel a mao. */
+  /** Lista separada por vírgula: mantem a URL legível e editável a mao. */
   colecao?: string;
   ordenacao?: OrdenacaoNft;
   disponiveis?: boolean;
@@ -20,7 +20,7 @@ export function colecoesParaBusca(lista: string[]): string | undefined {
   return lista.length > 0 ? lista.join(',') : undefined;
 }
 
-/** Validacao defensiva: a URL e editavel pelo usuario e nao pode derrubar a tela. */
+/** Validação defensiva: a URL é editável pelo usuário e não pode derrubar a tela. */
 export function validarBusca(bruto: Record<string, unknown>): BuscaCatalogo {
   const pagina = Number(bruto.pagina);
   const ordenacao = String(bruto.ordenacao) as OrdenacaoNft;

@@ -35,7 +35,7 @@ export const handlersSessao = [
       (c) => c.usuario.email.toLowerCase() === email!.trim().toLowerCase(),
     );
 
-    // Resposta identica para e-mail inexistente e senha errada: nao revela quem tem conta.
+    // Resposta idêntica para e-mail inexistente e senha errada: não revela quem tem conta.
     if (!conta || conta.usuario.senha !== senha) {
       return erro(401, 'CREDENCIAIS_INVALIDAS', 'E-mail ou senha incorretos.');
     }
