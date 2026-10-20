@@ -51,3 +51,18 @@ test('botao de favorito expoe o estado por aria-pressed', async ({ page }) => {
   await favorito.click();
   await expect(favorito).toHaveAttribute('aria-pressed', 'true');
 });
+
+test('no mobile o menu de navegação fica acessível por botão', async ({ page }, info) => {
+  test.skip(info.project.name !== 'mobile', 'exclusivo do viewport mobile');
+
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Abrir menu de navegação' }).click();
+
+  const menu = page.getByRole('dialog');
+  await expect(menu).toBeVisible();
+  await expect(menu.getByRole('link', { name: 'Mercado' })).toBeVisible();
+
+  await menu.getByRole('link', { name: 'Mercado' }).click();
+  await expect(page).toHaveURL(/\/mercado/);
+  await expect(menu).not.toBeVisible();
+});

@@ -5,6 +5,7 @@ import { consultaCarrinho } from '@/api/consultas';
 import { useSessao } from '@/hooks/useSessao';
 import { Botao } from '@/componentes/ui/Botao';
 import { IndicadorConexao } from './IndicadorConexao';
+import { MenuMobile } from './MenuMobile';
 
 const NAVEGACAO = [
   { para: '/', rotulo: 'Início' },
@@ -51,6 +52,8 @@ export function Cabecalho() {
 
         <div className="flex items-center gap-2">
           <IndicadorConexao />
+
+          <MenuMobile itens={NAVEGACAO} />
 
           <Botao variante="fantasma" tamanho="icone" aria-label="Buscar NFTs">
             <Search aria-hidden size={18} />

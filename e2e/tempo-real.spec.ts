@@ -34,24 +34,27 @@ test('evento atrasado nao faz o preco regredir', async ({ page }) => {
   let regressoes = 0;
   let mudancas = 0;
 
-  for (let i = 0; i < 20; i += 1) {
+  // amostra ate juntar evidencia suficiente, sem depender de cadencia fixa
+  const limite = Date.now() + 45_000;
+  while (mudancas < 3 && Date.now() < limite) {
     const titulos = await page.locator('article h3').allTextContents();
     const valores = await precos(page);
 
     titulos.forEach((titulo, k) => {
       const anteriores = historico.get(titulo) ?? [];
       const atual = valores[k];
-      if (anteriores.at(-1) !== atual) {
+      if (atual && anteriores.at(-1) !== atual) {
+        // voltar a um valor ja substituido significaria aplicar evento antigo
         if (anteriores.slice(0, -1).includes(atual)) regressoes += 1;
+        if (anteriores.length > 0) mudancas += 1;
         anteriores.push(atual);
-        mudancas += 1;
       }
       historico.set(titulo, anteriores);
     });
 
-    await page.waitForTimeout(600);
+    await page.waitForTimeout(400);
   }
 
-  expect(mudancas).toBeGreaterThan(0);
-  expect(regressoes).toBe(0);
+  expect(mudancas, 'nenhum evento aplicado na janela observada').toBeGreaterThan(0);
+  expect(regressoes, 'preco voltou a um valor ja superado').toBe(0);
 });
