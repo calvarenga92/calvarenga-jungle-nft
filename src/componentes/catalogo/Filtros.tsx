@@ -7,9 +7,9 @@ import { FiltroPreco } from './FiltroPreco';
 interface Props {
   colecoesSelecionadas: string[];
   somenteDisponiveis: boolean;
-  precoMin?: string;
-  precoMax?: string;
-  aoAplicarPreco: (faixa: { precoMin?: string; precoMax?: string }) => void;
+  precoMin?: number;
+  precoMax?: number;
+  aoAplicarPreco: (faixa: { precoMin?: number; precoMax?: number }) => void;
   aoAlternarColecao: (id: string) => void;
   aoAlternarDisponiveis: (valor: boolean) => void;
   aoLimpar: () => void;
@@ -27,7 +27,10 @@ export function Filtros({
 }: Props) {
   const { data: colecoes, isPending } = useQuery(consultaColecoes);
   const temFiltro =
-    colecoesSelecionadas.length > 0 || somenteDisponiveis || Boolean(precoMin || precoMax);
+    colecoesSelecionadas.length > 0
+    || somenteDisponiveis
+    || precoMin !== undefined
+    || precoMax !== undefined;
 
   return (
     <aside

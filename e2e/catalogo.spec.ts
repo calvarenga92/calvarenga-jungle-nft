@@ -115,3 +115,9 @@ test('mover o controle e aplicar grava a faixa na URL', async ({ page }) => {
   await page.getByRole('button', { name: 'Aplicar' }).click();
   await expect(page).toHaveURL(/precoMax=/);
 });
+
+test('o limite de preço vai legível na URL, sem aspas escapadas', async ({ page }) => {
+  await page.goto(url('/', { precoMax: '1' }));
+  await aguardarCatalogo(page);
+  await expect(page).toHaveURL(/precoMax=1(&|$)/);
+});

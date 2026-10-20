@@ -6,15 +6,16 @@ import { Esqueleto } from '@/componentes/Estados';
 import { Botao } from '@/componentes/ui/Botao';
 
 interface Props {
-  precoMin?: string;
-  precoMax?: string;
-  aoAplicar: (faixa: { precoMin?: string; precoMax?: string }) => void;
+  precoMin?: number;
+  precoMax?: number;
+  aoAplicar: (faixa: { precoMin?: number; precoMax?: number }) => void;
 }
 
 /** O slider trabalha em centésimos para evitar float no passo. */
 const ESCALA = 100;
-const paraPasso = (eth: string) => Math.round(Number(eth) * ESCALA);
-const paraEth = (passo: number) => (passo / ESCALA).toFixed(2);
+const paraPasso = (eth: string | number) => Math.round(Number(eth) * ESCALA);
+const paraEth = (passo: number) => passo / ESCALA;
+const exibir = (passo: number) => paraEth(passo).toFixed(2);
 
 export function FiltroPreco({ precoMin, precoMax, aoAplicar }: Props) {
   const { data: faixa, isPending } = useQuery(consultaFaixaPreco);
@@ -44,7 +45,7 @@ export function FiltroPreco({ precoMin, precoMax, aoAplicar }: Props) {
 
   const [inicio, fim] = valor;
   const alterado = inicio !== minimo || fim !== maximo;
-  const temFiltroAtivo = Boolean(precoMin || precoMax);
+  const temFiltroAtivo = precoMin !== undefined || precoMax !== undefined;
 
   return (
     <fieldset className="flex flex-col gap-3 border-0 p-0">
@@ -74,8 +75,8 @@ export function FiltroPreco({ precoMin, precoMax, aoAplicar }: Props) {
       </Slider.Root>
 
       <p aria-live="polite" className="text-caption text-muted">
-        Preço: <span className="text-foreground">{paraEth(inicio)}</span> —{' '}
-        <span className="text-foreground">{paraEth(fim)}</span> ETH
+        Preço: <span className="text-foreground">{exibir(inicio)}</span> —{' '}
+        <span className="text-foreground">{exibir(fim)}</span> ETH
       </p>
 
       <div className="flex gap-2">

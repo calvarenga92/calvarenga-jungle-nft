@@ -5,8 +5,8 @@ export interface BuscaCatalogo {
   busca?: string;
   /** Lista separada por vírgula: mantém a URL legível e editável à mão. */
   colecao?: string;
-  precoMin?: string;
-  precoMax?: string;
+  precoMin?: number;
+  precoMax?: number;
   ordenacao?: OrdenacaoNft;
   disponiveis?: boolean;
   pagina?: number;
@@ -23,14 +23,14 @@ export function colecoesParaBusca(lista: string[]): string | undefined {
 }
 
 /**
- * O router faz parsing tipo JSON do search, então "1.00" chega como número.
- * Aceito os dois e normalizo para string decimal, que é o formato do contrato.
+ * O limite vai como número na URL para o link ficar legível: string "1" seria
+ * serializada pelo router como %221%22. A conversão para decimal acontece na
+ * borda da API, onde a comparação é feita em bigint.
  */
-function decimalValido(valor: unknown): string | undefined {
-  if (typeof valor === 'number') {
-    return Number.isFinite(valor) && valor >= 0 ? String(valor) : undefined;
-  }
-  return typeof valor === 'string' && /^\d+(\.\d{1,4})?$/.test(valor) ? valor : undefined;
+function limiteValido(valor: unknown): number | undefined {
+  const numero = typeof valor === 'string' ? Number(valor) : valor;
+  if (typeof numero !== 'number' || !Number.isFinite(numero) || numero < 0) return undefined;
+  return numero;
 }
 
 export function validarBusca(bruto: Record<string, unknown>): BuscaCatalogo {
@@ -40,8 +40,8 @@ export function validarBusca(bruto: Record<string, unknown>): BuscaCatalogo {
   return {
     busca: typeof bruto.busca === 'string' && bruto.busca ? bruto.busca : undefined,
     colecao: typeof bruto.colecao === 'string' && bruto.colecao ? bruto.colecao : undefined,
-    precoMin: decimalValido(bruto.precoMin),
-    precoMax: decimalValido(bruto.precoMax),
+    precoMin: limiteValido(bruto.precoMin),
+    precoMax: limiteValido(bruto.precoMax),
     ordenacao: ORDENACOES_VALIDAS.includes(ordenacao) ? ordenacao : undefined,
     disponiveis: bruto.disponiveis === true || bruto.disponiveis === 'true' || undefined,
     pagina: Number.isFinite(pagina) && pagina > 1 ? Math.floor(pagina) : undefined,
@@ -52,8 +52,8 @@ export function paraConsulta(busca: BuscaCatalogo, porPagina = 9): ConsultaNfts 
   return {
     busca: busca.busca,
     colecoes: listaDeColecoes(busca.colecao),
-    precoMin: busca.precoMin,
-    precoMax: busca.precoMax,
+    precoMin: busca.precoMin?.toFixed(4),
+    precoMax: busca.precoMax?.toFixed(4),
     ordenacao: busca.ordenacao ?? 'recentes',
     somenteDisponiveis: busca.disponiveis ?? false,
     pagina: busca.pagina ?? 1,

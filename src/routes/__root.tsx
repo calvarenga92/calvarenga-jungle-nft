@@ -3,6 +3,7 @@ import type { QueryClient } from '@tanstack/react-query';
 import { Cabecalho } from '@/componentes/layout/Cabecalho';
 import { Rodape } from '@/componentes/layout/Rodape';
 import { FaixaPromo } from '@/componentes/layout/FaixaPromo';
+import { AvisoCenario } from '@/componentes/layout/AvisoCenario';
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: Layout,
@@ -20,6 +21,7 @@ function Layout() {
         Pular para o conteúdo
       </a>
 
+      <AvisoCenario />
       <Cabecalho />
 
       <main id="conteudo" className="flex-1">

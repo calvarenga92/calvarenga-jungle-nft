@@ -132,7 +132,7 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 
 ## Testes
 
-72 testes Playwright, rodando em desktop e mobile:
+78 testes Playwright, rodando em desktop e mobile:
 
 | Arquivo | Cobre |
 |---|---|
@@ -141,7 +141,7 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 | `compra.spec.ts` | Carrinho vazio, quantidade, cupom válido/inválido/expirado, compra completa, pagamento recusado, recibo após recarregar |
 | `tempo-real.spec.ts` | Conexão ativa, preço mudando sozinho, evento atrasado não regride o preço |
 | `acessibilidade.spec.ts` | Skip link, um `h1` por página, texto alternativo, navegação por teclado, `aria-pressed`, menu mobile |
-| `layout.spec.ts` | Nenhuma rota rola na horizontal, em desktop e mobile |
+| `layout.spec.ts` | Nenhuma rota rola na horizontal, aviso de cenário ativo, em desktop e mobile |
 
 Três problemas reais apareceram nessa suíte e estão corrigidos no histórico:
 
