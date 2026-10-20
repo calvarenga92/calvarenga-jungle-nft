@@ -18,7 +18,7 @@ test('credenciais invalidas mostram erro sem revelar se o e-mail existe', async 
   await expect(alerta).toHaveText('E-mail ou senha incorretos.');
 
   // e-mail inexistente devolve exatamente a mesma mensagem
-  await page.getByLabel('E-mail').fill('ninguem@greenmint.test');
+  await page.getByLabel('E-mail').fill('ninguem@kurio.test');
   await page.getByRole('button', { name: 'Entrar' }).click();
   await expect(alerta).toHaveText('E-mail ou senha incorretos.');
 });

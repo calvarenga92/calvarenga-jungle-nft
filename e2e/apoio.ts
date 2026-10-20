@@ -1,7 +1,7 @@
 import type { Page } from '@playwright/test';
 
 export const CONTA = {
-  email: 'claudio@greenmint.test',
+  email: 'claudio@kurio.test',
   senha: 'senha12345',
 };
 

@@ -40,7 +40,7 @@ test('o catalogo e navegavel so pelo teclado ate a peca', async ({ page }) => {
 
 test('botao de favorito expoe o estado por aria-pressed', async ({ page }) => {
   await page.goto('/entrar');
-  await page.getByLabel('E-mail').fill('claudio@greenmint.test');
+  await page.getByLabel('E-mail').fill('claudio@kurio.test');
   await page.getByLabel('Senha').fill('senha12345');
   await page.getByRole('button', { name: 'Entrar' }).click();
   await page.waitForURL('/');

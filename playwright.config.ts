@@ -11,6 +11,8 @@ export default defineConfig({
   fullyParallel: true,
   // o teste de ordenacao de eventos observa uma janela real de rede
   timeout: 60_000,
+  // o preview e single-thread; sob paralelismo a navegacao passa dos 5s padrao
+  expect: { timeout: 10_000 },
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : [['list']],

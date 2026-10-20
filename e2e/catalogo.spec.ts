@@ -13,14 +13,14 @@ test('lista as pecas da primeira pagina', async ({ page }) => {
 test('filtro por colecao reflete na URL e sobrevive ao recarregar', async ({ page }) => {
   await page.goto('/');
   await aguardarCatalogo(page);
-  await page.getByLabel('Golden Apes').check();
+  await page.getByLabel('Arte digital').check();
 
-  await expect(page).toHaveURL(/colecao=apes/);
-  await expect(cartoes(page)).toHaveCount(6);
+  await expect(page).toHaveURL(/colecao=arte-digital/);
+  await expect(cartoes(page)).toHaveCount(4);
 
   await page.reload();
-  await expect(page.getByLabel('Golden Apes')).toBeChecked();
-  await expect(cartoes(page)).toHaveCount(6);
+  await expect(page.getByLabel('Arte digital')).toBeChecked();
+  await expect(cartoes(page)).toHaveCount(4);
 });
 
 test('ordenacao por menor preco coloca a peca mais barata primeiro', async ({ page }) => {
@@ -61,9 +61,13 @@ test('busca pelo cabeçalho filtra o catálogo e aparece na URL', async ({ page 
   await expect(page).toHaveURL(/\/mercado\?busca=Neon/);
   await aguardarCatalogo(page);
 
-  const titulos = await cartoes(page).locator('h3').allTextContents();
-  expect(titulos.length).toBeGreaterThan(0);
-  expect(titulos.every((t) => t.includes('Neon'))).toBe(true);
+  // espera a lista refletir a busca: ler uma vez pode pegar o estado anterior
+  await expect
+    .poll(async () => {
+      const titulos = await cartoes(page).locator('h3').allTextContents();
+      return titulos.length > 0 && titulos.every((t) => t.includes('Neon'));
+    })
+    .toBe(true);
 });
 
 test('busca sem resultado explica o termo que falhou', async ({ page }) => {

@@ -24,7 +24,7 @@ test('cupom valido desconta e cupom invalido avisa', async ({ page }) => {
   await adicionarPrimeiraPeca(page);
   await page.goto('/carrinho');
 
-  await page.getByLabel('Código promocional').fill('GREENMINT10');
+  await page.getByLabel('Código promocional').fill('KURIO10');
   await page.getByRole('button', { name: 'Aplicar' }).click();
   await expect(page.getByText('10% de desconto')).toBeVisible();
 
