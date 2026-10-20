@@ -77,7 +77,9 @@ Toda resposta de erro tem a forma `{ codigo, mensagem, campos? }`. A interface d
 
 Filtros, ordenação e página são parâmetros de rota validados na entrada (`src/lib/busca.ts`). Compartilhar o link reproduz a lista exata, o botão voltar funciona, e recarregar não perde nada.
 
-As coleções vão como lista separada por vírgula (`?colecao=apes,punks`) em vez da serialização JSON padrão do router. `?colecao=%5B%22apes%22%5D` funciona, mas não é um link que alguém consiga ler ou editar à mão.
+A busca do cabeçalho entra no mesmo lugar: navega para `/mercado?busca=termo`, e o servidor procura em título, criador e coleção. Com busca ativa a lista mostra o termo com ação de limpar, e o estado vazio diz qual termo falhou em vez de um "nada encontrado" genérico — é a diferença entre o usuário achar que o site quebrou e entender que precisa tentar outra palavra.
+
+Duas escolhas de serialização foram para manter o link legível. As coleções vão como lista separada por vírgula (`?colecao=arte-digital,musica`), e não como o `?colecao=%5B%22arte-digital%22%5D` que o router produz por padrão. O limite de preço vai como número, porque uma string numérica seria serializada como `%221%22`.
 
 A validação é defensiva de propósito: a URL é editável pelo usuário e um valor inválido não pode derrubar a tela.
 
@@ -154,12 +156,13 @@ O último passou despercebido pelos testes funcionais, que acham e clicam em ele
 
 O teste de ordenação de eventos foi reescrito depois de falhar sob execução paralela. Ele amostrava em cadência fixa; agora observa até juntar evidência suficiente. Teste instável não serve de rede de proteção.
 
-### Busca mora na URL como o resto dos filtros
+## O que deixei de fora de propósito
 
-O campo do cabeçalho navega para `/mercado?busca=termo`. O servidor procura em título, criador e coleção. Quando há busca ativa, a lista mostra o termo com ação de limpar, e o estado vazio diz qual termo falhou em vez de um "nada encontrado" genérico — a diferença entre o usuário achar que o site quebrou e entender que precisa tentar outra palavra.
+- **Virtualização da lista.** São 24 peças. Virtualizar aqui é peso sem contrapartida, e a resposta certa para "por que não virtualizou" é "porque medi e não precisa", não "porque é sofisticado".
+- **Regressão visual por snapshot.** Baseline de pixel varia entre máquinas por renderização de fonte. Uma suíte que falha sem existir bug é pior que a ausência do teste — precisaria de ambiente fixo, e aí vira infraestrutura, não front-end.
+- **Zod.** A validação de parâmetro de busca é uma função de quinze linhas. Zod resolveria, mas são 12 KB para validar cinco campos.
+- **Gerenciador de estado global.** Estado de servidor está no TanStack Query e estado de navegação na URL. O que sobra é estado local de componente — não há o que gerenciar globalmente.
 
-## O que eu faria com mais tempo
+## O que faria com mais tempo
 
-- **Virtualização da lista** se o catálogo crescer muito além das 24 peças atuais. Com 24 itens seria peso sem contrapartida.
-- **Testes de componente** para os estados do cartão e do resumo, hoje cobertos só de ponta a ponta.
-- **Regressão visual** com snapshot do Playwright, que exige um baseline estável de ambiente.
+- **Testes de componente** para os estados do cartão e do resumo, hoje cobertos só de ponta a ponta. É o único item desta lista que ficou de fora por prazo, não por decisão.
