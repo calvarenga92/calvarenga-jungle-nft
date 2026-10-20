@@ -132,11 +132,11 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 
 ## Testes
 
-68 testes Playwright, rodando em desktop e mobile:
+72 testes Playwright, rodando em desktop e mobile:
 
 | Arquivo | Cobre |
 |---|---|
-| `catalogo.spec.ts` | Listagem, busca, filtro na URL, ordenação, paginação, lista vazia, erro do servidor |
+| `catalogo.spec.ts` | Listagem, busca, filtros (coleção e faixa de preço), ordenação, paginação, lista vazia, erro do servidor |
 | `sessao.spec.ts` | Entrada, credenciais inválidas, validação de cadastro, rota protegida, sessão expirada |
 | `compra.spec.ts` | Carrinho vazio, quantidade, cupom válido/inválido/expirado, compra completa, pagamento recusado, recibo após recarregar |
 | `tempo-real.spec.ts` | Conexão ativa, preço mudando sozinho, evento atrasado não regride o preço |
