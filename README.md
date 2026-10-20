@@ -37,6 +37,7 @@ React 19 · TypeScript · Vite · Tailwind v4 · TanStack Router · TanStack Que
 | Conta | Entrada, cadastro, perfil, carteiras (principal, secundárias) |
 | Tempo real | Preço e disponibilidade chegando por evento, com ordenação por versão |
 | Telas | Carregando, erro, vazio e sem permissão tratados em cada rota |
+| Responsivo | Layout de 390px a 1440px, com menu de navegação em sheet no mobile |
 
 ## Decisões técnicas
 
@@ -116,7 +117,7 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 
 ## Testes
 
-52 testes Playwright, rodando em desktop e mobile:
+54 testes Playwright, rodando em desktop e mobile:
 
 | Arquivo | Cobre |
 |---|---|
@@ -124,9 +125,15 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 | `sessao.spec.ts` | Entrada, credenciais inválidas, validação de cadastro, rota protegida, sessão expirada |
 | `compra.spec.ts` | Carrinho vazio, quantidade, cupom válido/inválido/expirado, compra completa, pagamento recusado, recibo após recarregar |
 | `tempo-real.spec.ts` | Conexão ativa, preço mudando sozinho, evento atrasado não regride o preço |
-| `acessibilidade.spec.ts` | Skip link, um `h1` por página, texto alternativo, navegação por teclado, `aria-pressed` |
+| `acessibilidade.spec.ts` | Skip link, um `h1` por página, texto alternativo, navegação por teclado, `aria-pressed`, menu mobile |
 
-Dois bugs reais apareceram nessa suíte e estão corrigidos no histórico: a página de entrada não tinha `h1`, e o botão de favoritar ficava embaixo do link esticado do cartão — clicar no coração levava para o detalhe.
+Três problemas reais apareceram nessa suíte e estão corrigidos no histórico:
+
+- a página de entrada não tinha `h1`;
+- o botão de favoritar ficava embaixo do link esticado do cartão, então clicar no coração levava para o detalhe;
+- o menu de navegação sumia no mobile, deixando o catálogo inalcançável abaixo de 768px.
+
+O teste de ordenação de eventos foi reescrito depois de falhar sob execução paralela. Ele amostrava em cadência fixa; agora observa até juntar evidência suficiente. Teste instável não serve de rede de proteção.
 
 ## O que eu faria com mais tempo
 
