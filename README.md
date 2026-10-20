@@ -43,80 +43,59 @@ React 19 · TypeScript · Vite · Tailwind v4 · TanStack Router · TanStack Que
 
 ## Decisões técnicas
 
+Quatro escolhas sustentam o resto. As outras estão no fim desta seção, em uma linha cada.
+
 ### Dinheiro nunca passa por ponto flutuante
 
-Valores em ETH trafegam como string decimal e são somados em `bigint` com 18 casas (`src/lib/decimal.ts`). `0.1 + 0.2` em JavaScript dá `0.30000000000000004`; num carrinho isso vira um total errado que ninguém consegue explicar depois.
+Valores em ETH trafegam como string decimal e são somados em `bigint` de 18 casas (`src/lib/decimal.ts`). `0.1 + 0.2` em JavaScript dá `0.30000000000000004` — num carrinho, centavo errado que ninguém consegue explicar depois.
 
-O efeito é visível: `0.42` mais `0.0042` de taxa de rede dá exatamente `0.4242`, e com cupom de 10% dá `0.3822`. Com `Number` o primeiro já sairia como `0.42419999999999997`.
+Medido: `0.42` mais `0.0042` de taxa dá exatamente `0.4242`; com cupom de 10%, `0.3822`. Com `Number`, o primeiro sairia `0.42419999999999997`.
 
-### Eventos carregam versão, e o cliente respeita a versão
+### Eventos carregam versão, e o cliente a respeita
 
-Entrega de WebSocket não garante ordem. Se um evento antigo chegar depois de um novo, o preço "volta" na tela — o usuário vê piscar e desconfia do sistema.
+WebSocket não garante ordem de entrega. Se um evento antigo chega depois de um novo, o preço "volta" na tela e o usuário desconfia do sistema.
 
-Todo evento traz `versao` e `eventoId`. O cliente descarta duplicatas pelo id e só aplica o evento se a versão for maior que a já exibida (`src/hooks/useTempoReal.ts`). O cenário `fora-de-ordem` emite de propósito um evento atrasado antes do atual, e existe teste medindo isso: as atualizações são aplicadas e nenhuma regressão acontece.
+Todo evento traz `eventoId` e `versao`. O cliente descarta duplicata pelo id e só aplica se a versão for maior que a exibida (`src/hooks/useTempoReal.ts`). Usei versão em vez de timestamp porque timestamp depende de relógio sincronizado entre instâncias.
+
+O cenário `fora-de-ordem` emite de propósito um evento atrasado antes do atual, e há teste medindo: atualizações aplicadas, zero regressões.
 
 ### Checkout idempotente
 
-A requisição de pedido vai com header `Idempotency-Key`. A chave nasce com a tentativa e só é trocada quando o pedido é confirmado.
+O pedido vai com header `Idempotency-Key`. A chave nasce com a tentativa e só é trocada quando o pedido é confirmado.
 
-Isso resolve o caso real de o usuário perder a conexão depois do servidor já ter processado: ao reenviar, a mesma chave devolve o pedido original em vez de cobrar de novo. Chave repetida com conteúdo diferente é recusada com `CHAVE_IDEMPOTENCIA_CONFLITANTE`.
+O detalhe que importa: se fosse gerada no clique, o retry após um timeout criaria chave nova e cobraria de novo — exatamente o que a idempotência deveria evitar. Chave repetida com conteúdo diferente é recusada com `CHAVE_IDEMPOTENCIA_CONFLITANTE`.
 
-### A cotação é versionada e conferida na hora de confirmar
+### A cotação é versionada e conferida na confirmação
 
-O resumo do carrinho tem uma `versao` derivada de preço, quantidade e cupom. Se qualquer coisa mudar entre ver o resumo e clicar em confirmar — e com tempo real isso muda sozinho — o servidor recusa com `COTACAO_DESATUALIZADA` e a interface oferece atualizar o resumo.
+O resumo do carrinho tem uma `versao` derivada de preço, quantidade e cupom. Se algo mudar entre ver o resumo e confirmar — e com tempo real isso muda sozinho — o servidor recusa com `COTACAO_DESATUALIZADA` e a interface oferece atualizar.
 
-O alternativo seria cobrar pelo valor novo sem avisar. Ninguém gosta de descobrir isso na fatura.
-
-### Erro é identificado por código, nunca por texto
-
-Toda resposta de erro tem a forma `{ codigo, mensagem, campos? }`. A interface decide o que fazer pelo `codigo`; o texto é só para exibir. Assim a mensagem pode mudar no servidor, ou ser traduzida, sem quebrar nenhuma condicional.
-
-`campos` carrega erro por campo de formulário, que é como o usuário consegue consertar o que errou.
-
-### O estado da busca mora na URL
-
-Filtros, ordenação e página são parâmetros de rota validados na entrada (`src/lib/busca.ts`). Compartilhar o link reproduz a lista exata, o botão voltar funciona, e recarregar não perde nada.
-
-A busca do cabeçalho entra no mesmo lugar: navega para `/mercado?busca=termo`, e o servidor procura em título, criador e coleção. Com busca ativa a lista mostra o termo com ação de limpar, e o estado vazio diz qual termo falhou em vez de um "nada encontrado" genérico — é a diferença entre o usuário achar que o site quebrou e entender que precisa tentar outra palavra.
-
-Duas escolhas de serialização foram para manter o link legível. As coleções vão como lista separada por vírgula (`?colecao=arte-digital,musica`), e não como o `?colecao=%5B%22arte-digital%22%5D` que o router produz por padrão. O limite de preço vai como número, porque uma string numérica seria serializada como `%221%22`.
-
-A validação é defensiva de propósito: a URL é editável pelo usuário e um valor inválido não pode derrubar a tela.
+A alternativa seria cobrar o valor novo sem avisar.
 
 ### Mock como simulação, não como stub
 
-O MSW aqui não devolve resposta fixa. Existe um estado em memória com carrinho por usuário, controle de estoque, idempotência e sequência de eventos (`src/mocks/store.ts`). Comprar baixa o estoque de verdade e dispara evento.
+O MSW não devolve resposta fixa: há estado em memória com carrinho por usuário, baixa de estoque, idempotência e sequência de eventos (`src/mocks/store.ts`). Comprar realmente decrementa estoque e dispara evento.
 
-Além disso há 11 cenários selecionáveis por `?cenario=` — `latencia-alta`, `fora-de-ordem`, `erro-servidor`, `sessao-expirada`, `cupom-invalido`, `preco-alterado`, `pagamento-recusado`, entre outros. Eles existem para que os caminhos infelizes sejam demonstráveis e testáveis, não só imagináveis.
+São 11 cenários acionáveis por `?cenario=` — `erro-servidor`, `lista-vazia`, `latencia-alta`, `fora-de-ordem`, `pagamento-recusado`, `sessao-expirada`, entre outros. Existem para que os caminhos infelizes sejam demonstráveis, não só imagináveis. Um aviso no topo indica quando há cenário ativo, com botão para voltar ao padrão.
 
-### Login responde igual para e-mail inexistente e senha errada
+### O caminho real do socket.io é demonstrável
 
-Respostas diferentes permitem descobrir quem tem conta no sistema, o que vira insumo para phishing e força bruta direcionada.
-
-### Token em sessionStorage, com fallback em memória
-
-A sessão morre quando a aba fecha, o que reduz a janela de exposição. Todas as leituras e escritas estão em `try/catch`: em navegação privada o acesso pode lançar, e nesse caso a sessão simplesmente vive em memória (`src/lib/token.ts`).
-
-### O caminho real do socket.io tem como ser exercitado
-
-O simulador local existe para a demo rodar sem backend, mas ele não prova que a integração com `socket.io-client` funciona. Por isso o repositório traz um servidor de eventos de desenvolvimento:
+O simulador local faz a demo rodar sem backend, mas não prova que a integração funciona. Por isso há um servidor de eventos de desenvolvimento:
 
 ```bash
-npm run eventos                                       # ou eventos:fora-de-ordem
+npm run eventos:fora-de-ordem
 VITE_SOCKET_URL=http://localhost:3001 npm run dev
 ```
 
-Com isso a aplicação abre WebSocket de verdade, o chunk do `socket.io-client` é baixado e os eventos chegam como frames reais. O modo `eventos:fora-de-ordem` manda de propósito um evento com versão anterior antes do atual — foi assim que verifiquei a proteção por versão contra tráfego real, e não só contra o simulador.
+A aplicação abre WebSocket de verdade e o chunk do `socket.io-client` (42 KB) é baixado sob demanda. Foi assim que verifiquei a proteção por versão contra frames reais, e não só contra o simulador. O servidor fica em `servidor/eventos.mjs` e não entra no build.
 
-O servidor fica em `servidor/eventos.mjs`, é dependência de desenvolvimento e não entra no build.
+### As outras
 
-### Mock e socket carregados sob demanda
-
-`socket.io-client` só entra no bundle se `VITE_SOCKET_URL` estiver definida; o MSW só é carregado se `VITE_API_URL` estiver vazia. Em um deploy com backend real, nenhum dos dois é baixado pelo usuário.
-
-### Quatro estados em cada tela
-
-Carregando, erro, vazio e sem permissão são tratados explicitamente, não só o caminho feliz. Lista vazia e sessão expirada são os dois que mais escapam e viram tela branca em produção.
+- **Erro é identificado por código, nunca por texto.** Toda resposta tem `{ codigo, mensagem, campos? }`; a interface decide pelo `codigo`, então a mensagem pode mudar ou ser traduzida sem quebrar condicional. `campos` carrega erro por campo de formulário.
+- **O estado da busca mora na URL.** Filtros, ordenação, busca e página são parâmetros validados na entrada (`src/lib/busca.ts`) — compartilhar o link reproduz a lista. As coleções vão separadas por vírgula e o limite de preço como número, para o link continuar legível em vez do `%5B%22...%22%5D` que o router produz por padrão.
+- **Login responde igual para e-mail inexistente e senha errada.** Respostas diferentes permitem enumerar quem tem conta, insumo para phishing e força bruta.
+- **Token em `sessionStorage`, com fallback em memória.** Morre ao fechar a aba; leituras em `try/catch` porque em navegação privada o acesso pode lançar.
+- **Mock e socket carregados sob demanda.** Com `VITE_API_URL` e `VITE_SOCKET_URL` definidas, nenhum dos dois é baixado pelo usuário.
+- **Quatro estados em cada tela.** Carregando, erro, vazio e sem permissão — não só o caminho feliz. Lista vazia e sessão expirada são os que mais escapam e viram tela branca em produção.
 
 ## Sobre as imagens
 
