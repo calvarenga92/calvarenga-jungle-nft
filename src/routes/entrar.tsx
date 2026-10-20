@@ -7,7 +7,7 @@ import { Campo } from '@/componentes/ui/Campo';
 import { cn } from '@/lib/utils';
 
 export const Route = createFileRoute('/entrar')({
-  // destino opcional: preserva para onde o usuario queria ir antes do login
+  // destino opcional: preserva para onde o usuário queria ir antes do login
   validateSearch: (bruto: Record<string, unknown>): { destino?: string } =>
     typeof bruto.destino === 'string' ? { destino: bruto.destino } : {},
   component: Entrar,
@@ -60,8 +60,8 @@ function Entrar() {
         {aba === 'entrar' ? <FormularioEntrar /> : <FormularioCriar />}
 
         <p className="mt-6 border-t border-border-subtle pt-4 text-caption text-muted">
-          Contas da simulação: <span className="text-foreground">claudio@greenmint.test</span> ou{' '}
-          <span className="text-foreground">marina@greenmint.test</span>, senha{' '}
+          Contas da simulação: <span className="text-foreground">claudio@kurio.test</span> ou{' '}
+          <span className="text-foreground">marina@kurio.test</span>, senha{' '}
           <span className="text-foreground">senha12345</span>.
         </p>
       </div>

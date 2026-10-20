@@ -1,6 +1,6 @@
 /**
- * Cenarios sao selecionados por query param (?cenario=) ou localStorage,
- * de modo que a mesma build sirva desenvolvimento, demonstracao e testes.
+ * Seleciono o cenário por query param (?cenario=) ou localStorage, para a mesma
+ * build servir desenvolvimento, demonstração e teste.
  */
 export const CENARIOS = {
   padrao: 'Resposta rápida e consistente',
@@ -18,7 +18,7 @@ export const CENARIOS = {
 
 export type Cenario = keyof typeof CENARIOS;
 
-const CHAVE = 'greenmint.mock.cenario';
+const CHAVE = 'kurio.mock.cenario';
 
 export function cenarioAtual(): Cenario {
   try {
@@ -30,7 +30,7 @@ export function cenarioAtual(): Cenario {
     const salvo = localStorage.getItem(CHAVE);
     if (salvo && salvo in CENARIOS) return salvo as Cenario;
   } catch {
-    // storage bloqueado: cai no padrao
+    // storage bloqueado: cai no padrão
   }
   return 'padrao';
 }

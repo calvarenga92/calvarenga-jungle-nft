@@ -20,7 +20,7 @@ export interface Estado {
   sequenciaEvento: number;
 }
 
-const CHAVE = 'greenmint.mock.estado';
+const CHAVE = 'kurio.mock.estado';
 
 function carrinhoVazio(): Carrinho {
   return { itens: [], cupom: null };
@@ -57,7 +57,7 @@ export function estadoInicial(): Estado {
 
 export let estado: Estado = estadoInicial();
 
-/** Serializacao manual: Set nao sobrevive a JSON. */
+/** Serialização manual: Set não sobrevive a JSON. */
 function serializar(e: Estado): string {
   return JSON.stringify({
     ...e,
@@ -87,7 +87,7 @@ export function persistir(): void {
   try {
     localStorage.setItem(CHAVE, serializar(estado));
   } catch {
-    // storage indisponivel: o cenario vive apenas em memoria
+    // storage indisponível: o cenário vive apenas em memória
   }
 }
 
