@@ -29,7 +29,7 @@ React 19 · TypeScript · Vite · Tailwind v4 · TanStack Router · TanStack Que
 
 | Área | Entregue |
 |---|---|
-| Catálogo | Filtro por coleção e disponibilidade, ordenação, paginação — tudo refletido na URL |
+| Catálogo | Busca por texto, filtro por coleção e disponibilidade, ordenação, paginação — tudo refletido na URL |
 | Peça | Galeria, seleção de edição, atributos, favoritar, adicionar ao carrinho |
 | Carrinho | Quantidade com limite por edição, cupom, cotação recalculada no servidor |
 | Checkout | Seleção de carteira, cotação versionada, requisição idempotente |
@@ -117,11 +117,11 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 
 ## Testes
 
-54 testes Playwright, rodando em desktop e mobile:
+58 testes Playwright, rodando em desktop e mobile:
 
 | Arquivo | Cobre |
 |---|---|
-| `catalogo.spec.ts` | Listagem, filtro na URL, ordenação, paginação, lista vazia, erro do servidor |
+| `catalogo.spec.ts` | Listagem, busca, filtro na URL, ordenação, paginação, lista vazia, erro do servidor |
 | `sessao.spec.ts` | Entrada, credenciais inválidas, validação de cadastro, rota protegida, sessão expirada |
 | `compra.spec.ts` | Carrinho vazio, quantidade, cupom válido/inválido/expirado, compra completa, pagamento recusado, recibo após recarregar |
 | `tempo-real.spec.ts` | Conexão ativa, preço mudando sozinho, evento atrasado não regride o preço |
@@ -135,10 +135,13 @@ Três problemas reais apareceram nessa suíte e estão corrigidos no histórico:
 
 O teste de ordenação de eventos foi reescrito depois de falhar sob execução paralela. Ele amostrava em cadência fixa; agora observa até juntar evidência suficiente. Teste instável não serve de rede de proteção.
 
+### Busca mora na URL como o resto dos filtros
+
+O campo do cabeçalho navega para `/mercado?busca=termo`. O servidor procura em título, criador e coleção. Quando há busca ativa, a lista mostra o termo com ação de limpar, e o estado vazio diz qual termo falhou em vez de um "nada encontrado" genérico — a diferença entre o usuário achar que o site quebrou e entender que precisa tentar outra palavra.
+
 ## O que eu faria com mais tempo
 
 - **Servidor Socket.IO de verdade.** A interface `Conexao` já isola isso; trocar o simulador pelo cliente real é uma variável de ambiente.
-- **Busca por texto na interface.** O endpoint e o parâmetro de URL já aceitam `busca`; falta o campo no cabeçalho.
 - **Faixa de preço nos filtros.** O backend simulado já aceita `precoMin` e `precoMax`.
 - **Virtualização da lista** se o catálogo crescer muito além das 24 peças atuais.
 - **Testes de componente** para os estados do cartão e do resumo, hoje cobertos só de ponta a ponta.

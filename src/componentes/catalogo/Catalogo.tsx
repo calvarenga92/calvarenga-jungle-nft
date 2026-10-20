@@ -47,6 +47,21 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
         />
 
         <div className="flex flex-col gap-6">
+          {busca.busca && (
+            <p className="flex flex-wrap items-center gap-2 text-caption text-muted">
+              Resultados para
+              <span className="text-foreground">&ldquo;{busca.busca}&rdquo;</span>
+              <button
+                type="button"
+                onClick={() => aoMudarBusca({ busca: undefined, pagina: undefined })}
+                className="rounded-[3px] border border-border-subtle px-2 py-0.5
+                           text-caption text-muted transition-colors hover:text-primary"
+              >
+                limpar busca
+              </button>
+            </p>
+          )}
+
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p aria-live="polite" className="text-caption text-muted">
               {isPending
@@ -86,7 +101,11 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
           {data && data.itens.length === 0 && (
             <Vazio
               titulo="Nenhuma peça encontrada"
-              descricao="Nenhum NFT corresponde aos filtros atuais. Tente remover alguma restrição."
+              descricao={
+                busca.busca
+                  ? `Nada corresponde a "${busca.busca}". Tente outro termo ou remova os filtros.`
+                  : 'Nenhum NFT corresponde aos filtros atuais. Tente remover alguma restrição.'
+              }
             />
           )}
 

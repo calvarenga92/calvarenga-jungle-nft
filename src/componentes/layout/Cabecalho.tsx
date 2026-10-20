@@ -1,11 +1,12 @@
 import { Link } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
-import { Search, ShoppingCart, LogIn } from 'lucide-react';
+import { ShoppingCart, LogIn } from 'lucide-react';
 import { consultaCarrinho } from '@/api/consultas';
 import { useSessao } from '@/hooks/useSessao';
 import { Botao } from '@/componentes/ui/Botao';
 import { IndicadorConexao } from './IndicadorConexao';
 import { MenuMobile } from './MenuMobile';
+import { BuscaCabecalho } from './BuscaCabecalho';
 
 const NAVEGACAO = [
   { para: '/', rotulo: 'Início' },
@@ -55,9 +56,7 @@ export function Cabecalho() {
 
           <MenuMobile itens={NAVEGACAO} />
 
-          <Botao variante="fantasma" tamanho="icone" aria-label="Buscar NFTs">
-            <Search aria-hidden size={18} />
-          </Botao>
+          <BuscaCabecalho />
 
           <Botao variante="fantasma" tamanho="icone" asChild>
             <Link

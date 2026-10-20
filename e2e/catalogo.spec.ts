@@ -49,3 +49,30 @@ test('falha do servidor mostra erro com acao de repetir', async ({ page }) => {
   await expect(page.getByRole('alert')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Tentar de novo' })).toBeVisible();
 });
+
+test('busca pelo cabeçalho filtra o catálogo e aparece na URL', async ({ page }) => {
+  await page.goto('/');
+  await aguardarCatalogo(page);
+
+  await page.getByRole('button', { name: 'Buscar NFTs' }).click();
+  await page.getByLabel('Buscar por título, criador ou coleção').fill('Neon');
+  await page.getByRole('button', { name: 'Buscar', exact: true }).click();
+
+  await expect(page).toHaveURL(/\/mercado\?busca=Neon/);
+  await aguardarCatalogo(page);
+
+  const titulos = await cartoes(page).locator('h3').allTextContents();
+  expect(titulos.length).toBeGreaterThan(0);
+  expect(titulos.every((t) => t.includes('Neon'))).toBe(true);
+});
+
+test('busca sem resultado explica o termo que falhou', async ({ page }) => {
+  await page.goto(url('/mercado', { busca: 'zzzznaoexiste' }));
+
+  const vazio = page.getByRole('status').filter({ hasText: 'Nenhuma peça encontrada' });
+  await expect(vazio).toBeVisible();
+  await expect(vazio).toContainText('zzzznaoexiste');
+
+  // o termo tambem fica visivel no cabecalho da lista, com acao de limpar
+  await expect(page.getByRole('button', { name: 'limpar busca' })).toBeVisible();
+});
