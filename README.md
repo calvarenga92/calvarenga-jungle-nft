@@ -31,7 +31,7 @@ React 19 · TypeScript · Vite · Tailwind v4 · TanStack Router · TanStack Que
 
 | Área | Entregue |
 |---|---|
-| Catálogo | Busca por texto, filtro por coleção e disponibilidade, ordenação, paginação — tudo refletido na URL |
+| Catálogo | Busca por texto, filtro por coleção, faixa de preço e disponibilidade, ordenação, paginação — tudo refletido na URL |
 | Peça | Galeria, seleção de edição, atributos, favoritar, adicionar ao carrinho |
 | Carrinho | Quantidade com limite por edição, cupom, cotação recalculada no servidor |
 | Checkout | Seleção de carteira, cotação versionada, requisição idempotente |
@@ -95,6 +95,19 @@ Respostas diferentes permitem descobrir quem tem conta no sistema, o que vira in
 
 A sessão morre quando a aba fecha, o que reduz a janela de exposição. Todas as leituras e escritas estão em `try/catch`: em navegação privada o acesso pode lançar, e nesse caso a sessão simplesmente vive em memória (`src/lib/token.ts`).
 
+### O caminho real do socket.io tem como ser exercitado
+
+O simulador local existe para a demo rodar sem backend, mas ele não prova que a integração com `socket.io-client` funciona. Por isso o repositório traz um servidor de eventos de desenvolvimento:
+
+```bash
+npm run eventos                                       # ou eventos:fora-de-ordem
+VITE_SOCKET_URL=http://localhost:3001 npm run dev
+```
+
+Com isso a aplicação abre WebSocket de verdade, o chunk do `socket.io-client` é baixado e os eventos chegam como frames reais. O modo `eventos:fora-de-ordem` manda de propósito um evento com versão anterior antes do atual — foi assim que verifiquei a proteção por versão contra tráfego real, e não só contra o simulador.
+
+O servidor fica em `servidor/eventos.mjs`, é dependência de desenvolvimento e não entra no build.
+
 ### Mock e socket carregados sob demanda
 
 `socket.io-client` só entra no bundle se `VITE_SOCKET_URL` estiver definida; o MSW só é carregado se `VITE_API_URL` estiver vazia. Em um deploy com backend real, nenhum dos dois é baixado pelo usuário.
@@ -119,7 +132,7 @@ O catálogo é navegável só pelo teclado até a peça, e isso tem teste.
 
 ## Testes
 
-64 testes Playwright, rodando em desktop e mobile:
+68 testes Playwright, rodando em desktop e mobile:
 
 | Arquivo | Cobre |
 |---|---|
@@ -147,8 +160,6 @@ O campo do cabeçalho navega para `/mercado?busca=termo`. O servidor procura em 
 
 ## O que eu faria com mais tempo
 
-- **Servidor Socket.IO de verdade.** A interface `Conexao` já isola isso; trocar o simulador pelo cliente real é uma variável de ambiente.
-- **Faixa de preço nos filtros.** O backend simulado já aceita `precoMin` e `precoMax`.
-- **Virtualização da lista** se o catálogo crescer muito além das 24 peças atuais.
+- **Virtualização da lista** se o catálogo crescer muito além das 24 peças atuais. Com 24 itens seria peso sem contrapartida.
 - **Testes de componente** para os estados do cartão e do resumo, hoje cobertos só de ponta a ponta.
 - **Regressão visual** com snapshot do Playwright, que exige um baseline estável de ambiente.
