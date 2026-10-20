@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { aguardarCatalogo, limparEstado, url } from './apoio';
+import { aguardarCatalogo, cartoes, limparEstado, url } from './apoio';
 
 test.beforeEach(async ({ page }) => { await limparEstado(page); });
 
 const precos = (pagina: import('@playwright/test').Page) =>
-  pagina.locator('article p.text-primary').allTextContents();
+  cartoes(pagina).locator('p.text-primary').allTextContents();
 
 test('conexao em tempo real fica ativa', async ({ page }) => {
   await page.goto('/');
@@ -37,7 +37,7 @@ test('evento atrasado nao faz o preco regredir', async ({ page }) => {
   // amostra ate juntar evidencia suficiente, sem depender de cadencia fixa
   const limite = Date.now() + 45_000;
   while (mudancas < 3 && Date.now() < limite) {
-    const titulos = await page.locator('article h3').allTextContents();
+    const titulos = await cartoes(page).locator('h3').allTextContents();
     const valores = await precos(page);
 
     titulos.forEach((titulo, k) => {

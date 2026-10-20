@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { aguardarCatalogo, limparEstado, url } from './apoio';
+import { aguardarCatalogo, cartoes, limparEstado, url } from './apoio';
 
 test.beforeEach(async ({ page }) => { await limparEstado(page); });
 
 test('lista as pecas da primeira pagina', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('article')).toHaveCount(9);
+  await expect(cartoes(page)).toHaveCount(9);
   await expect(page.getByRole('heading', { level: 1 }))
     .toHaveText(/Seja dono do futuro da arte digital/i);
 });
@@ -16,17 +16,17 @@ test('filtro por colecao reflete na URL e sobrevive ao recarregar', async ({ pag
   await page.getByLabel('Golden Apes').check();
 
   await expect(page).toHaveURL(/colecao=apes/);
-  await expect(page.locator('article')).toHaveCount(6);
+  await expect(cartoes(page)).toHaveCount(6);
 
   await page.reload();
   await expect(page.getByLabel('Golden Apes')).toBeChecked();
-  await expect(page.locator('article')).toHaveCount(6);
+  await expect(cartoes(page)).toHaveCount(6);
 });
 
 test('ordenacao por menor preco coloca a peca mais barata primeiro', async ({ page }) => {
   await page.goto(url('/', { ordenacao: 'preco-asc' }));
   await aguardarCatalogo(page);
-  const precos = await page.locator('article p.text-primary').allTextContents();
+  const precos = await cartoes(page).locator('p.text-primary').allTextContents();
   const numeros = precos.map((p) => Number(p.replace(' ETH', '')));
   expect(numeros).toEqual([...numeros].sort((a, b) => a - b));
 });

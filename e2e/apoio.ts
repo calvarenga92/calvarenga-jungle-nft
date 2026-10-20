@@ -31,15 +31,22 @@ export async function limparEstado(pagina: Page) {
   });
 }
 
+/**
+ * O blog da home tambem usa <article>, entao o catalogo precisa de escopo
+ * proprio — senao a contagem mistura peca com post.
+ */
+export const cartoes = (pagina: Page) =>
+  pagina.locator('section[aria-labelledby="titulo-catalogo"] article');
+
 /** allTextContents e count nao esperam: a grade precisa estar montada antes. */
 export async function aguardarCatalogo(pagina: Page) {
-  await pagina.locator('article').first().waitFor();
+  await cartoes(pagina).first().waitFor();
 }
 
 export async function adicionarPrimeiraPeca(pagina: Page) {
   await pagina.goto('/');
   await aguardarCatalogo(pagina);
-  await pagina.locator('article a').first().click();
+  await cartoes(pagina).locator('a').first().click();
   await pagina.waitForURL(/\/nft\//);
   await pagina.getByRole('button', { name: /Comprar/ }).click();
   await pagina.getByText('Adicionado ao carrinho.').waitFor();

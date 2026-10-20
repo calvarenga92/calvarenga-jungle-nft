@@ -2,6 +2,7 @@ import { createRootRouteWithContext, Outlet, ScrollRestoration } from '@tanstack
 import type { QueryClient } from '@tanstack/react-query';
 import { Cabecalho } from '@/componentes/layout/Cabecalho';
 import { Rodape } from '@/componentes/layout/Rodape';
+import { FaixaPromo } from '@/componentes/layout/FaixaPromo';
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   component: Layout,
@@ -25,6 +26,7 @@ function Layout() {
         <Outlet />
       </main>
 
+      <FaixaPromo />
       <Rodape />
       <ScrollRestoration />
     </div>

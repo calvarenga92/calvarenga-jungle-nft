@@ -26,7 +26,7 @@ const REDES = [
 
 export function Rodape() {
   return (
-    <footer className="mt-24 bg-surface">
+    <footer className="mt-16 bg-surface">
       <div className="conteudo">
         <div
           className="flex flex-col gap-4 border-b border-border-subtle bg-surface-2 px-6 py-5

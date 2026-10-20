@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Heroi } from '@/componentes/inicio/Heroi';
 import { Catalogo } from '@/componentes/catalogo/Catalogo';
+import { Blog } from '@/componentes/inicio/Blog';
 import { validarBusca, type BuscaCatalogo } from '@/lib/busca';
 
 export const Route = createFileRoute('/')({
@@ -20,6 +21,7 @@ function Inicio() {
     <>
       <Heroi />
       <Catalogo busca={busca} aoMudarBusca={aoMudarBusca} />
+      <Blog />
     </>
   );
 }
