@@ -1,12 +1,10 @@
 import { http, HttpResponse } from 'msw';
 import type { Cotacao, ItemCarrinho } from '@/api/tipos';
-import { multiplicar, paraTexto, paraUnidades, percentual, somar, subtrair } from '@/lib/decimal';
+import { calcularTotais, subtotalDoItem, versaoDaCotacao } from '@calvarenga92/kurio-regras';
 import { atrasar, cenarioEh } from '../cenarios';
 import { erro, falhaTransitoria, naoEncontrado, tokenDaRequisicao } from '../respostas';
 import { carrinhoDe, contaDaSessao, estado, persistir } from '../store';
 import { CUPONS } from '../dados/nfts';
-
-const TAXA_REDE = '0.0042';
 
 function localizar(nftId: string, edicaoId: string) {
   const nft = estado.nfts.find((n) => n.id === nftId);
@@ -27,7 +25,7 @@ function sincronizar(item: ItemCarrinho): ItemCarrinho {
     rotuloEdicao: edicao.rotulo,
     quantidade,
     precoUnitarioEth: edicao.precoEth,
-    subtotalEth: multiplicar(edicao.precoEth, quantidade),
+    subtotalEth: subtotalDoItem(edicao.precoEth, quantidade),
     disponivel: edicao.disponivel,
     versaoNft: nft.versao,
   };
@@ -38,31 +36,17 @@ export function cotacaoAtual(token: string | null): Cotacao {
   const carrinho = carrinhoDe(conta);
   carrinho.itens = carrinho.itens.map(sincronizar);
 
-  const subtotal = carrinho.itens.reduce(
-    (acc, i) => somar(acc, i.subtotalEth), '0',
-  );
-
-  const regra = carrinho.cupom ? CUPONS[carrinho.cupom.codigo] : undefined;
-  const desconto = regra && !regra.expirado ? percentual(subtotal, regra.percentual) : '0';
-  const temItens = carrinho.itens.length > 0;
-  const taxa = temItens ? TAXA_REDE : '0';
-  const total = somar(subtrair(subtotal, desconto), taxa);
-
-  // A versão resume preço, quantidade e cupom: qualquer mudanca inválida a cotação no checkout.
-  const impressao = [
-    ...carrinho.itens.map((i) => `${i.edicaoId}:${i.quantidade}:${i.precoUnitarioEth}`),
-    carrinho.cupom?.codigo ?? '-',
-    cenarioEh('preco-alterado') ? 'alterado' : '-',
-  ].join('|');
+  // Totais em 18 casas, calculados pela mesma regra que o app mobile usa.
+  const totais = calcularTotais(carrinho.itens, carrinho.cupom);
 
   return {
     itens: carrinho.itens,
-    subtotalEth: paraTexto(paraUnidades(subtotal), 4),
-    descontoEth: paraTexto(paraUnidades(desconto), 4),
-    taxaRedeEth: taxa,
-    totalEth: paraTexto(paraUnidades(total), 4),
+    ...totais,
     cupom: carrinho.cupom,
-    versao: btoa(impressao).slice(0, 24),
+    // A versão resume preço, quantidade e cupom: qualquer mudança invalida a cotação no checkout.
+    versao: versaoDaCotacao(
+      carrinho.itens, carrinho.cupom, [cenarioEh('preco-alterado') ? 'alterado' : '-'],
+    ),
     expiraEm: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
   };
 }

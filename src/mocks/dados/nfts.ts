@@ -1,4 +1,5 @@
 import type { Nft } from '@/api/tipos';
+import { percentual } from '@/lib/decimal';
 
 /** Categorias do catálogo, conforme a barra de filtros do design. */
 const COLECOES = [
@@ -80,7 +81,8 @@ export const NFTS: Nft[] = CATALOGO.map((item, i) => {
       {
         id: `${i + 1}-rara`,
         rotulo: 'Rara',
-        precoEth: (Number(item.preco) * 2.5).toFixed(2),
+        // 2,5x o preço padrão em 18 casas: o float de Number(...) * 2.5 arredondava diferente por valor.
+        precoEth: percentual(item.preco, 250),
         disponivel: esgotado ? 0 : 1 + (i % 2),
         limitePorPedido: 1,
       },
@@ -93,11 +95,8 @@ export const NFTS: Nft[] = CATALOGO.map((item, i) => {
   };
 });
 
-export const CUPONS: Record<string, { percentual: number; expirado: boolean }> = {
-  KURIO10: { percentual: 10, expirado: false },
-  COLECIONADOR20: { percentual: 20, expirado: false },
-  EXPIRADO50: { percentual: 50, expirado: true },
-};
+/** Regra de cupom compartilhada com o app mobile. */
+export { CUPONS } from '@calvarenga92/kurio-regras';
 
 export const USUARIOS = [
   {

@@ -45,9 +45,11 @@ React 19 · TypeScript · Vite · Tailwind v4 · TanStack Router · TanStack Que
 
 Quatro escolhas sustentam o resto. As outras estão no fim desta seção, em uma linha cada.
 
+As regras de dinheiro, cotação e idempotência não moram neste repositório: vêm do pacote [`@calvarenga92/kurio-regras`](https://www.npmjs.com/package/@calvarenga92/kurio-regras), o mesmo usado pelo [app mobile](https://github.com/calvarenga92/kurio-mobile). Assim, web e mobile calculam o mesmo total e tratam o reenvio do pagamento do mesmo jeito.
+
 ### Dinheiro nunca passa por ponto flutuante
 
-Valores em ETH trafegam como string decimal e são somados em `bigint` de 18 casas (`src/lib/decimal.ts`). `0.1 + 0.2` em JavaScript dá `0.30000000000000004` — num carrinho, centavo errado que ninguém consegue explicar depois.
+Valores em ETH trafegam como string decimal e são somados em `bigint` de 18 casas (pacote `kurio-regras`, reexportado em `src/lib/decimal.ts`). `0.1 + 0.2` em JavaScript dá `0.30000000000000004` — num carrinho, centavo errado que ninguém consegue explicar depois.
 
 Medido: `0.42` mais `0.0042` de taxa dá exatamente `0.4242`; com cupom de 10%, `0.3822`. Com `Number`, o primeiro sairia `0.42419999999999997`.
 
