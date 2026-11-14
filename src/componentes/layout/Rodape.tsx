@@ -32,7 +32,7 @@ export function Rodape() {
           className="flex flex-col gap-4 border-b border-border-subtle bg-surface-2 px-6 py-5
                      text-caption text-muted sm:flex-row sm:items-center sm:justify-between"
         >
-          <span className="text-label tracking-[0.2em] text-foreground">KURIO</span>
+          <span className="text-label font-extrabold tracking-[-0.04em] text-foreground">Kurio</span>
           <span>Feito para colecionadores, criadores e cultura</span>
           <a href="mailto:contato@kurio.test" className="hover:text-primary">
             contato@kurio.test
@@ -66,7 +66,7 @@ export function Rodape() {
                   <a
                     href="#"
                     aria-label={nome}
-                    className="flex size-8 items-center justify-center rounded-[3px]
+                    className="flex size-8 items-center justify-center rounded-xl
                                bg-primary text-primary-ink hover:bg-primary-hover"
                   >
                     <Icone aria-hidden size={15} />
@@ -80,7 +80,7 @@ export function Rodape() {
               {['MetaMask', 'WalletConnect', 'Coinbase'].map((carteira) => (
                 <li
                   key={carteira}
-                  className="rounded-[3px] border border-border-strong px-2 py-1
+                  className="rounded-xl border border-border-strong px-2 py-1
                              text-[10px] uppercase tracking-wider text-secondary"
                 >
                   {carteira}

@@ -50,7 +50,7 @@ function ConfirmacaoPedido() {
       <div className="conteudo py-8">
         <section
           aria-labelledby="pedido-titulo"
-          className="mx-auto flex max-w-2xl flex-col gap-6 rounded-[3px]
+          className="mx-auto flex max-w-2xl flex-col gap-6 rounded-xl
                      border border-border-subtle bg-surface p-8"
         >
           <header className="flex flex-col items-center gap-3 text-center">
@@ -91,7 +91,7 @@ function ConfirmacaoPedido() {
                     width={44}
                     height={44}
                     loading="lazy"
-                    className="size-11 shrink-0 rounded-[3px] border border-border-subtle object-cover"
+                    className="size-11 shrink-0 rounded-xl border border-border-subtle object-cover"
                   />
                   <div className="flex flex-1 flex-col">
                     <span className="text-caption text-foreground">{item.titulo}</span>

@@ -54,7 +54,7 @@ export function BuscaCabecalho() {
         ref={campo}
         type="search"
         placeholder="título, criador, coleção"
-        className="h-10 min-w-0 flex-1 rounded-[3px] border border-border-subtle
+        className="h-10 min-w-0 flex-1 rounded-xl border border-border-subtle
                    bg-surface px-3 text-caption text-foreground focus:border-primary
                    sm:w-56 sm:flex-none"
       />

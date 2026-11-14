@@ -4,16 +4,19 @@ import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
 const botao = cva(
-  'inline-flex items-center justify-center gap-2 rounded-[3px] font-bold ' +
-    'transition-colors disabled:pointer-events-none disabled:opacity-50 ' +
+  'inline-flex items-center justify-center gap-2 rounded-xl font-bold ' +
+    'transition-[color,background-color,border-color,filter,transform] ' +
+    'disabled:pointer-events-none disabled:opacity-50 ' +
     'whitespace-nowrap',
   {
     variants: {
       variante: {
-        primario: 'bg-primary text-primary-ink hover:bg-primary-hover',
+        primario: 'fundo-cta hover:brightness-110 active:translate-y-px',
         contorno:
-          'border border-border-strong text-foreground hover:border-primary hover:text-primary',
+          'border border-border-strong bg-surface text-foreground hover:border-primary hover:text-primary',
         fantasma: 'text-muted hover:text-foreground',
+        // Sobre o bloco colorido do topo, nos três temas.
+        claro: 'bg-white text-[#16110e] hover:bg-white/90',
         perigo: 'bg-danger text-ink hover:opacity-90',
       },
       tamanho: {

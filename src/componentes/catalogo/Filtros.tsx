@@ -35,7 +35,7 @@ export function Filtros({
   return (
     <aside
       aria-label="Filtros do catálogo"
-      className="flex h-fit flex-col gap-8 rounded-[3px] border border-border-subtle
+      className="flex h-fit flex-col gap-8 rounded-xl border border-border-subtle
                  bg-surface p-5 lg:sticky lg:top-6"
     >
       <fieldset className="flex flex-col gap-3 border-0 p-0">

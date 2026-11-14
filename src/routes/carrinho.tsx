@@ -78,7 +78,7 @@ function Carrinho() {
                           width={56}
                           height={56}
                           loading="lazy"
-                          className="size-14 shrink-0 rounded-[3px] border border-border-subtle object-cover"
+                          className="size-14 shrink-0 rounded-xl border border-border-subtle object-cover"
                         />
                         <div className="flex flex-col gap-0.5">
                           <span className="text-label text-foreground">{item.titulo}</span>

@@ -26,7 +26,7 @@ function Entrar() {
 
   return (
     <div className="conteudo flex justify-center py-16">
-      <div className="w-full max-w-md rounded-[3px] border border-border-subtle bg-surface p-8">
+      <div className="w-full max-w-md rounded-xl border border-border-subtle bg-surface p-8">
         <h1 className="mb-6 text-title text-foreground">
           {aba === 'entrar' ? 'Entrar na Kurio' : 'Criar conta na Kurio'}
         </h1>

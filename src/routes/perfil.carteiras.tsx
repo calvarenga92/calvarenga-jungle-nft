@@ -42,7 +42,7 @@ function Carteiras() {
             <li
               key={carteira.id}
               className={cn(
-                'flex flex-wrap items-center justify-between gap-4 rounded-[3px] border px-4 py-3',
+                'flex flex-wrap items-center justify-between gap-4 rounded-xl border px-4 py-3',
                 carteira.principal ? 'border-primary/50 bg-primary/5' : 'border-border-subtle',
               )}
             >
@@ -50,7 +50,7 @@ function Carteiras() {
                 <span className="flex items-center gap-2 text-label text-foreground">
                   {carteira.apelido}
                   {carteira.principal && (
-                    <span className="rounded-[3px] bg-primary px-1.5 py-0.5 text-[10px]
+                    <span className="rounded-xl bg-primary px-1.5 py-0.5 text-[10px]
                                      font-bold uppercase text-primary-ink">
                       Principal
                     </span>
@@ -87,7 +87,7 @@ function Carteiras() {
         </ul>
       )}
 
-      <div className="max-w-2xl rounded-[3px] border border-border-subtle bg-surface p-6">
+      <div className="max-w-2xl rounded-xl border border-border-subtle bg-surface p-6">
         <h2 className="mb-5 text-label text-foreground">Adicionar carteira</h2>
         <FormularioCarteira />
       </div>

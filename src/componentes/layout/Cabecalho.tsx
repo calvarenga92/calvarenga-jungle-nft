@@ -7,6 +7,7 @@ import { Botao } from '@/componentes/ui/Botao';
 import { IndicadorConexao } from './IndicadorConexao';
 import { MenuMobile } from './MenuMobile';
 import { BuscaCabecalho } from './BuscaCabecalho';
+import { SeletorTema } from './SeletorTema';
 
 const NAVEGACAO = [
   { para: '/', rotulo: 'Início' },
@@ -25,10 +26,10 @@ export function Cabecalho() {
       <div className="conteudo relative flex h-20 items-center justify-between gap-6">
         <Link
           to="/"
-          className="text-title tracking-[0.2em] text-foreground"
+          className="text-2xl font-extrabold tracking-[-0.04em] text-foreground"
           aria-label="Kurio, página inicial"
         >
-          KURIO
+          Kurio
         </Link>
 
         <nav aria-label="Principal" className="hidden md:block">
@@ -53,6 +54,8 @@ export function Cabecalho() {
 
         <div className="flex items-center gap-2">
           <IndicadorConexao />
+
+          <SeletorTema className="hidden lg:flex" />
 
           <MenuMobile itens={NAVEGACAO} />
 

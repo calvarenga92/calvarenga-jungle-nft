@@ -38,6 +38,7 @@ React 19 · TypeScript · Vite · Tailwind v4 · TanStack Router · TanStack Que
 | Pedido | Recibo imutável com snapshot dos itens |
 | Conta | Entrada, cadastro, perfil, carteiras (principal, secundárias) |
 | Tempo real | Preço e disponibilidade chegando por evento, com ordenação por versão |
+| Temas | Três temas (gradiente quente, noturna neon, elétrica) sobre os mesmos tokens; escolha salva, acessível por teclado e compartilhável por `?tema=` |
 | Telas | Carregando, erro, vazio e sem permissão tratados em cada rota |
 | Responsivo | Layout de 390px a 1440px, com menu de navegação em sheet no mobile |
 

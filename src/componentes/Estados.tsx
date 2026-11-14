@@ -13,7 +13,7 @@ function Moldura({ icone, titulo, descricao, acao }: EstadoProps & { icone: Reac
   return (
     <div
       role="status"
-      className="flex flex-col items-center justify-center gap-3 rounded-[3px]
+      className="flex flex-col items-center justify-center gap-3 rounded-xl
                  border border-border-subtle bg-surface px-6 py-16 text-center"
     >
       <span aria-hidden className="text-secondary">{icone}</span>
@@ -40,7 +40,7 @@ export function Erro({
   return (
     <div
       role="alert"
-      className="flex flex-col items-center justify-center gap-3 rounded-[3px]
+      className="flex flex-col items-center justify-center gap-3 rounded-xl
                  border border-danger/40 bg-surface px-6 py-16 text-center"
     >
       <AlertTriangle aria-hidden size={28} className="text-danger" />
@@ -59,7 +59,7 @@ export function Esqueleto({ className }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={cn('animate-pulse rounded-[3px] bg-surface-2', className)}
+      className={cn('animate-pulse rounded-xl bg-surface-2', className)}
     />
   );
 }

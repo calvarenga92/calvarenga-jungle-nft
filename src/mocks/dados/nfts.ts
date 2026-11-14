@@ -45,7 +45,7 @@ const CATALOGO: Array<{ titulo: string; colecao: string; preco: string }> = [
 ];
 
 function imagem(indice: number): string {
-  return `/nfts/nft-${String((indice % 12) + 1).padStart(2, '0')}.svg`;
+  return `/nfts/nft-${String((indice % 12) + 1).padStart(2, '0')}.png`;
 }
 
 function colecaoPorId(id: string) {

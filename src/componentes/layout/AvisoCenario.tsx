@@ -25,7 +25,7 @@ export function AvisoCenario() {
           definirCenario('padrao');
           window.location.search = '';
         }}
-        className="rounded-[3px] border border-primary-ink/40 px-2 py-0.5
+        className="rounded-xl border border-primary-ink/40 px-2 py-0.5
                    font-bold transition-colors hover:bg-primary-ink/10"
       >
         voltar ao padrão

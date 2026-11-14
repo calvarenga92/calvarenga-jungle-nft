@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Menu, X } from 'lucide-react';
+import { SeletorTema } from './SeletorTema';
 
 interface Props {
   itens: ReadonlyArray<{ para: '/' | '/mercado' | '/criadores' | '/aprenda'; rotulo: string }>;
@@ -28,8 +29,8 @@ export function MenuMobile({ itens }: Props) {
                      gap-2 border-l border-border-subtle bg-surface p-6"
         >
           <div className="mb-4 flex items-center justify-between">
-            <Dialog.Title className="text-label tracking-[0.2em] text-foreground">
-              KURIO
+            <Dialog.Title className="text-label font-extrabold tracking-[-0.04em] text-foreground">
+              Kurio
             </Dialog.Title>
             <Dialog.Close
               className="flex size-9 items-center justify-center text-muted
@@ -62,6 +63,11 @@ export function MenuMobile({ itens }: Props) {
               ))}
             </ul>
           </nav>
+
+          <div className="mt-auto flex items-center justify-between gap-3 pt-6">
+            <span className="text-caption text-muted">Tema</span>
+            <SeletorTema />
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -27,7 +27,7 @@ export function Campo({
         aria-invalid={erro ? true : undefined}
         aria-describedby={cn(erro && idErro, apoio && idApoio) || undefined}
         className={cn(
-          'h-10 rounded-[3px] border bg-surface px-3 text-body text-foreground',
+          'h-10 rounded-xl border bg-surface px-3 text-body text-foreground',
           'transition-colors focus:border-primary',
           erro ? 'border-danger' : 'border-border-subtle',
           className,

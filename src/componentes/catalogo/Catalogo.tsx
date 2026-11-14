@@ -63,7 +63,7 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
               <button
                 type="button"
                 onClick={() => aoMudarBusca({ busca: undefined, pagina: undefined })}
-                className="rounded-[3px] border border-border-subtle px-2 py-0.5
+                className="rounded-xl border border-border-subtle px-2 py-0.5
                            text-caption text-muted transition-colors hover:text-primary"
               >
                 limpar busca
@@ -88,7 +88,7 @@ export function Catalogo({ busca, aoMudarBusca }: Props) {
                     pagina: undefined,
                   })
                 }
-                className="h-9 rounded-[3px] border border-border-subtle bg-surface
+                className="h-9 rounded-xl border border-border-subtle bg-surface
                            px-2 text-caption text-foreground"
               >
                 {ORDENACOES.map((opcao) => (

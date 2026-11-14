@@ -32,7 +32,7 @@ export function FaixaPromo() {
   return (
     <section
       aria-labelledby="promo-titulo"
-      className="conteudo mt-24 grid gap-8 rounded-[3px] bg-surface px-6 py-10
+      className="conteudo mt-24 grid gap-8 rounded-xl bg-surface px-6 py-10
                  lg:grid-cols-[2fr_1fr] lg:gap-12"
     >
       <h2 id="promo-titulo" className="sr-only">
@@ -69,7 +69,7 @@ export function FaixaPromo() {
             type="email"
             required
             placeholder="seu endereço de contato"
-            className="h-10 min-w-0 flex-1 rounded-[3px] border border-border-strong
+            className="h-10 min-w-0 flex-1 rounded-xl border border-border-strong
                        bg-ink px-3 text-caption text-foreground focus:border-primary"
           />
           <Botao type="submit">Enviar</Botao>

@@ -26,7 +26,7 @@ test('filtro por colecao reflete na URL e sobrevive ao recarregar', async ({ pag
 test('ordenacao por menor preco coloca a peca mais barata primeiro', async ({ page }) => {
   await page.goto(url('/', { ordenacao: 'preco-asc' }));
   await aguardarCatalogo(page);
-  const precos = await cartoes(page).locator('p.text-primary').allTextContents();
+  const precos = await cartoes(page).getByTestId('preco').allTextContents();
   const numeros = precos.map((p) => Number(p.replace(' ETH', '')));
   expect(numeros).toEqual([...numeros].sort((a, b) => a - b));
 });
@@ -85,7 +85,7 @@ test('faixa de preço vinda da URL filtra o catálogo', async ({ page }) => {
   await page.goto(url('/', { precoMax: '1' }));
   await aguardarCatalogo(page);
 
-  const precos = await cartoes(page).locator('p.text-primary').allTextContents();
+  const precos = await cartoes(page).getByTestId('preco').allTextContents();
   expect(precos.length).toBeGreaterThan(0);
   expect(precos.every((p) => Number(p.replace(' ETH', '')) <= 1)).toBe(true);
 });

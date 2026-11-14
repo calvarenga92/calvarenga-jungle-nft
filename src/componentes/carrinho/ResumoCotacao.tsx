@@ -31,7 +31,7 @@ export function ResumoCotacao({ cotacao, acao }: Props) {
   return (
     <section
       aria-labelledby="resumo-titulo"
-      className="flex h-fit flex-col gap-5 rounded-[3px] border border-border-subtle
+      className="flex h-fit flex-col gap-5 rounded-xl border border-border-subtle
                  bg-surface p-6 lg:sticky lg:top-6"
     >
       <h2 id="resumo-titulo" className="text-title text-foreground">
@@ -39,7 +39,7 @@ export function ResumoCotacao({ cotacao, acao }: Props) {
       </h2>
 
       {cotacao.cupom ? (
-        <div className="flex items-center justify-between gap-3 rounded-[3px]
+        <div className="flex items-center justify-between gap-3 rounded-xl
                         border border-primary/40 bg-primary/10 px-3 py-2">
           <span className="text-caption text-foreground">
             {cotacao.cupom.codigo} — {cotacao.cupom.descricaoDesconto}
@@ -66,7 +66,7 @@ export function ResumoCotacao({ cotacao, acao }: Props) {
               placeholder="Digite o código"
               aria-invalid={erroCupom ? true : undefined}
               aria-describedby={erroCupom ? 'cupom-erro' : undefined}
-              className="h-10 min-w-0 flex-1 rounded-[3px] border border-border-subtle
+              className="h-10 min-w-0 flex-1 rounded-xl border border-border-subtle
                          bg-ink px-3 text-caption text-foreground focus:border-primary"
             />
             <Botao type="submit" disabled={!codigo.trim() || aplicar.isPending}>

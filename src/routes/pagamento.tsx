@@ -91,7 +91,7 @@ function Pagamento() {
                     <label
                       key={carteira.id}
                       className={cn(
-                        'flex cursor-pointer items-center justify-between gap-4 rounded-[3px]',
+                        'flex cursor-pointer items-center justify-between gap-4 rounded-xl',
                         'border px-4 py-3 transition-colors',
                         carteira.id === carteiraId
                           ? 'border-primary bg-primary/10'
@@ -123,7 +123,7 @@ function Pagamento() {
               )}
 
               {carteiras && carteiras.length === 0 && (
-                <div className="rounded-[3px] border border-border-subtle bg-surface p-6">
+                <div className="rounded-xl border border-border-subtle bg-surface p-6">
                   <h3 className="mb-1 text-label text-foreground">
                     Cadastre uma carteira
                   </h3>
@@ -142,7 +142,7 @@ function Pagamento() {
                   {erro && (
                     <p
                       role="alert"
-                      className="flex items-start gap-2 rounded-[3px] border border-danger/40
+                      className="flex items-start gap-2 rounded-xl border border-danger/40
                                  bg-danger/10 px-3 py-2 text-caption text-danger"
                     >
                       <AlertTriangle aria-hidden size={14} className="mt-0.5 shrink-0" />

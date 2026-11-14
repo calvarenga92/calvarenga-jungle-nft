@@ -4,7 +4,7 @@ import { aguardarCatalogo, cartoes, limparEstado, url } from './apoio';
 test.beforeEach(async ({ page }) => { await limparEstado(page); });
 
 const precos = (pagina: import('@playwright/test').Page) =>
-  cartoes(pagina).locator('p.text-primary').allTextContents();
+  cartoes(pagina).getByTestId('preco').allTextContents();
 
 test('conexao em tempo real fica ativa', async ({ page }) => {
   await page.goto('/');

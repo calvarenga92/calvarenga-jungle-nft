@@ -58,7 +58,7 @@ export function FormularioCarteira({ aoCriar }: { aoCriar?: () => void }) {
           id="rede"
           name="rede"
           defaultValue="ethereum"
-          className="h-10 rounded-[3px] border border-border-subtle bg-surface
+          className="h-10 rounded-xl border border-border-subtle bg-surface
                      px-3 text-body text-foreground focus:border-primary"
         >
           {REDES.map((rede) => (

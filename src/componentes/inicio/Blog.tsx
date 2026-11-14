@@ -1,28 +1,28 @@
 const ARTIGOS = [
   {
     id: 'cunhagem',
-    imagem: '/nfts/nft-03.svg',
+    imagem: '/nfts/nft-03.png',
     titulo: 'O que muda quando a cunhagem é aberta',
     resumo: 'Edição limitada, fila de espera e preço dinâmico: como cada formato afeta quem coleciona.',
     data: '12 de outubro',
   },
   {
     id: 'carteira',
-    imagem: '/nfts/nft-06.svg',
+    imagem: '/nfts/nft-06.png',
     titulo: 'Carteira quente ou fria para começar',
     resumo: 'Onde guardar o que você comprou, e por que a resposta depende de quanto você movimenta.',
     data: '05 de outubro',
   },
   {
     id: 'royalties',
-    imagem: '/nfts/nft-09.svg',
+    imagem: '/nfts/nft-09.png',
     titulo: 'Royalties de criador na prática',
     resumo: 'Como a porcentagem do autor é registrada no contrato e o que acontece na revenda.',
     data: '28 de setembro',
   },
   {
     id: 'raridade',
-    imagem: '/nfts/nft-11.svg',
+    imagem: '/nfts/nft-11.png',
     titulo: 'Raridade não é só o atributo mais raro',
     resumo: 'A combinação entre traços importa mais que o traço isolado. Um exemplo com números.',
     data: '21 de setembro',
@@ -45,7 +45,7 @@ export function Blog() {
         {ARTIGOS.map((artigo) => (
           <li key={artigo.id}>
             <article className="group flex h-full flex-col gap-3">
-              <div className="overflow-hidden rounded-[3px] border border-border-subtle bg-surface">
+              <div className="overflow-hidden rounded-xl border border-border-subtle bg-surface">
                 <img
                   src={artigo.imagem}
                   alt=""

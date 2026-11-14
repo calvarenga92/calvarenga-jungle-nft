@@ -8,13 +8,24 @@
       name="description"
       content="Descubra NFTs selecionados de criadores emergentes e consagrados. Colecione arte digital rara e apoie artistas."
     />
-    <meta name="theme-color" content="#140d0a" />
+    <meta name="theme-color" content="#fff7ef" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Aplica o tema salvo antes da primeira pintura, para não piscar o tema padrão.
+      try {
+        var daUrl = new URLSearchParams(location.search).get('tema');
+        var tema = daUrl || localStorage.getItem('kurio:tema');
+        if (daUrl) localStorage.setItem('kurio:tema', daUrl);
+        if (tema === 'quente' || tema === 'neon' || tema === 'eletrica') {
+          document.documentElement.dataset.tema = tema;
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

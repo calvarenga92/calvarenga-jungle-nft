@@ -22,7 +22,7 @@ export function Galeria({ imagens, titulo }: Props) {
                 aria-label={`Ver imagem ${indice + 1} de ${lista.length}`}
                 aria-current={indice === ativa}
                 className={cn(
-                  'size-16 overflow-hidden rounded-[3px] border transition-colors',
+                  'size-16 overflow-hidden rounded-xl border transition-colors',
                   indice === ativa ? 'border-primary' : 'border-border-subtle hover:border-secondary',
                 )}
               >
@@ -40,7 +40,7 @@ export function Galeria({ imagens, titulo }: Props) {
         </ul>
       )}
 
-      <div className="flex-1 overflow-hidden rounded-[3px] border border-border-subtle bg-surface">
+      <div className="flex-1 self-start overflow-hidden rounded-3xl border border-border-subtle bg-surface">
         <img
           src={lista[ativa]}
           alt={titulo}

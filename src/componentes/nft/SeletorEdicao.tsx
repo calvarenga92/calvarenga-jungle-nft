@@ -22,7 +22,7 @@ export function SeletorEdicao({ edicoes, selecionada, aoSelecionar }: Props) {
             <label
               key={edicao.id}
               className={cn(
-                'flex cursor-pointer flex-col gap-1 rounded-[3px] border px-4 py-3 transition-colors',
+                'flex cursor-pointer flex-col gap-1 rounded-xl border px-4 py-3 transition-colors',
                 ativa ? 'border-primary bg-primary/10' : 'border-border-subtle hover:border-secondary',
                 esgotada && 'cursor-not-allowed opacity-50',
               )}

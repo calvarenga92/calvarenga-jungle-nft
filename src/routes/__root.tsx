@@ -15,7 +15,7 @@ function Layout() {
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4
-                   focus:z-50 focus:rounded-[3px] focus:bg-primary focus:px-4
+                   focus:z-50 focus:rounded-xl focus:bg-primary focus:px-4
                    focus:py-2 focus:text-primary-ink"
       >
         Pular para o conteúdo

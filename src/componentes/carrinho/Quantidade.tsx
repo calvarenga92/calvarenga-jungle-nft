@@ -10,7 +10,7 @@ interface Props {
 
 export function Quantidade({ valor, maximo, rotulo, desabilitado, aoMudar }: Props) {
   return (
-    <div className="inline-flex items-center rounded-[3px] border border-border-subtle">
+    <div className="inline-flex items-center rounded-xl border border-border-subtle">
       <button
         type="button"
         onClick={() => aoMudar(valor - 1)}
