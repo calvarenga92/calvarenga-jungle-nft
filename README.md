@@ -6,6 +6,11 @@ Desafio técnico de front-end. Marketplace completo com catálogo, carrinho, che
 
 Não existe backend: a API é simulada com MSW, e os eventos de tempo real têm um simulador local por trás da mesma interface do `socket.io-client`. Com as variáveis de ambiente apontando para serviços reais, nada disso entra no bundle.
 
+## Design e fluxo de UX
+
+- [Telas no Figma](https://www.figma.com/design/uTnOgVhzcVUIGBXPrWHoCf?node-id=0-1)
+- [Fluxo de UX no Figma](https://www.figma.com/design/uTnOgVhzcVUIGBXPrWHoCf?node-id=25-155): compra e pagamento, com os cinco cenários de rede e o retry idempotente
+
 ## Como rodar
 
 Requer Node 20+.
