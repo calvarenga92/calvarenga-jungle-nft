@@ -91,10 +91,19 @@ export function persistir(): void {
   }
 }
 
+/**
+ * Estado salvo por versões anteriores aponta para as artes antigas em SVG.
+ * Migra os endereços em vez de descartar o estado: pedidos, carrinho e
+ * favoritos de quem já visitou continuam valendo.
+ */
+function migrarArtes(texto: string): string {
+  return texto.replace(/(\/nfts\/nft-\d{2})\.svg/g, '$1.png');
+}
+
 export function restaurar(): void {
   try {
     const texto = localStorage.getItem(CHAVE);
-    if (texto) estado = desserializar(texto);
+    if (texto) estado = desserializar(migrarArtes(texto));
   } catch {
     estado = estadoInicial();
   }
